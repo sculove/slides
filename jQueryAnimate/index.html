@@ -12,11 +12,11 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
-		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+		<link rel="stylesheet" href="../presentation-tool/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../presentation-tool/revealjs/css/theme/moon.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../presentation-tool/revealjs/lib/css/zenburn.css">
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -24,7 +24,7 @@
 				var link = document.createElement( 'link' );
 				link.rel = 'stylesheet';
 				link.type = 'text/css';
-				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				link.href = '../presentation-tool/revealjs/css/print/pdf.css';
 				document.getElementsByTagName( 'head' )[0].appendChild( link );
 			}
 		</script>
@@ -261,8 +261,8 @@ jQuery.Animation.prefilter( function( element, props, opts ) {
 
 		</div>
 
-		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
-		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+		<script src="../presentation-tool/revealjs/lib/js/head.min.js"></script>
+		<script src="../presentation-tool/revealjs/js/reveal.min.js"></script>
 
 		<script>
 			// Full list of configuration options available here:
@@ -280,15 +280,15 @@ jQuery.Animation.prefilter( function( element, props, opts ) {
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../presentation-tool/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../presentation-tool/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../presentation-tool/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../presentation-tool/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					// https://github.com/iamvdo/Reveal-liveCoding
-					{ src: '../__lib__/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
-					{ src: '../__lib__/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
-					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: '../presentation-tool/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../presentation-tool/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../presentation-tool/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../presentation-tool/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 

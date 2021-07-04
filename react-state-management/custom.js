@@ -1,7 +1,7 @@
-import Reveal from '../__lib__/reveal.js-4.0.2/dist/reveal.esm.js';
-import Markdown from '../__lib__/reveal.js-4.0.2/plugin/markdown/markdown.esm.js';
-import Highlight from '../__lib__/reveal.js-4.0.2/plugin/highlight/highlight.esm.js';
-import Zoom from '../__lib__/reveal.js-4.0.2/plugin/zoom/zoom.esm.js';
+import Reveal from '../presentation-tool/reveal.js-4.0.2/dist/reveal.esm.js';
+import Markdown from '../presentation-tool/reveal.js-4.0.2/plugin/markdown/markdown.esm.js';
+import Highlight from '../presentation-tool/reveal.js-4.0.2/plugin/highlight/highlight.esm.js';
+import Zoom from '../presentation-tool/reveal.js-4.0.2/plugin/zoom/zoom.esm.js';
 
 Reveal.initialize({
   // Display a presentation progress bar
