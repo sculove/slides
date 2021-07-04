@@ -1,0 +1,43 @@
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>HTML5 Web Animation- cssTransition</title>
+<meta name="description" content="animation">
+<meta name="author" content="sculove. 손찬욱">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+.wrap {
+	position:relative;
+}
+.box {
+	border-radius:5px;
+	width : 100px;
+	height : 100px;
+	background-color: #7018ff;
+	position:absolute;
+	left : 0px;
+	top : 0px;
+	transform:translate3d(0,0,0);
+	transition : transform 3s linear;
+}
+button {
+	margin:10px 0;
+}
+.move {
+	transform : translateX(300px);
+}
+</style>
+</head>
+<body>
+<button id="run">Run</button>
+<div class="wrap">
+	<div id="box" class="box"></div>
+</div>
+<script>
+var el=document.getElementById("box");
+document.getElementById("run").addEventListener("click", function(e) {
+	el.classList.add("move");
+});
+</script>
+</body>
+</html>

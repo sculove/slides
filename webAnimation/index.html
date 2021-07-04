@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 Web Animation API</title>
+
+		<meta name="description" content="animation">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<script src="../__lib__/revealjs/lib/js/jquery-1.11.3.js"></script>
+		<script src="../__lib__/revealjs/lib/js/web-animations-next.min.js"></script>
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.code > button:hover {
+	opacity: 1;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+
+blockquote {
+	width : 95% !important;
+	border-radius: 5px;
+}
+
+
+
+.playground {
+    position:relative;
+}
+.box {
+    border-radius:5px;
+    width : 150px;
+    height : 150px;
+    position:absolute;
+    left : 0px;
+    top : 0px;
+    background-color: #305930;
+    transform:translate3d(0,0,0);
+}
+
+.smallbox {
+    border-radius:5px;
+    width : 50px;
+    height : 50px;
+    position:absolute;
+    left : 0px;
+    top : 0px;
+    background-color: #668392;
+    transform:translate3d(0,0,0);
+}
+
+.message {
+	background-color: #fff;
+	font-size:0.5em !important;
+	border-radius:5px;
+	line-height: 2em !important;
+}
+
+#old1,#old2,#old3 { transition: opacity 1s ease; }
+#old4 {
+	transition: opacity 1s ease;
+}
+#old5 {
+	transition: opacity 1s ease 1s;
+}
+#old6  {
+	transition: opacity 1s ease 2s;
+}
+.fade {
+	opacity:0;
+}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/abstract-abstraction-circles-texture-textures-bubbles-bubble-bubbles-wallpapers.jpg" data-transition="zoom" data-background-transition="zoom">
+					<img src="image/1000px-HTML5-logo.svg_1.png" style="width:200px;box-shadow:0 0 0px rgba(0, 0, 0, 0)"/>
+					<h1 style="color:#DE4182">Web Animation API</h1>
+					<br>
+					<p>
+						<small style="color:#268bd2">Created by <a href="http://sculove.pe.kr" style="color:rgb(35,0,172)">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section  data-background="#8c4738">
+					<h2>HTML5 이전의 애니메이션</h2>
+					<br>
+					<p>setTimeout, setInterval</p>
+				</section>
+				<section>
+					<h3>느리다</h3>
+					<p>setTimeout은 main Thread의 작업에 영향을 받는다.</p>
+					<img src="image/settimeout.png"/>
+				</section>
+				<section>
+					<h3>구현하기가 복잡하고, 어렵다</h3><br>
+					<iframe src="example/setTimeout.html" style="background-color: #fff;width:500px;height:200px"></iframe>
+				</section>
+				<section>
+					<h3>구현하기가 복잡하고, 어렵다</h3>
+					<pre><code>
+function animate(el, x, y, duration) {
+	var startTime = Date.now();
+	var now, per;
+	(function loop() {
+		now = Date.now();
+		if (now >= startTime + duration) {
+			// animation 종료 시점 (loop 종료 시점)
+			el.style.transform = "translate3d(" + x + "px," + y + "px,0)";
+			return;
+		}
+		per =  (now - startTime) / duration;
+		// animation 진행. easing 처리
+		el.style.transform = "translate3d(" + (x * per)  + "px," +  (y * per)  + "px,0)";
+		// loop 재호출
+		setTimeout(loop, 16);
+	})();
+}
+</code></pre>
+				</section>
+				<section>
+					<h2>HTML5 애니메이션 기술</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>구분</th>
+								<th>기술</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Javascript</td>
+								<td>requestAnimationFrame</td>
+							<tr>
+							<tr>
+								<td>CSS</td>
+								<td>CSS Transition</td>
+							<tr>
+							<tr>
+								<td>CSS</td>
+								<td>CSS Animation</td>
+							<tr>
+							<tr>
+								<td>SVG</td>
+								<td>SVG Animation</td>
+							<tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>더 빠르다</h3>
+					<p><span class="semi-strong">requestAnimationFrame</span>는 setTimeout과 사용법은<p>
+					<p>동일하지만 <span class="strong">60 fps</span>를 보장한다.</p>
+					<img src="image/settimeout.png"/>
+					<img src="image/rqa.png"/>
+				</section>
+				<section>
+					<h3>더 빠르다</h3>
+					<p>CSS 는 <span class="strong">별도의 thread</span>를 이용하기 때문에 빠르다.</p>
+					<img src="image/mainthread.png"/>
+					<img src="image/otherthread.png"/>
+					<small><a href="example/requestAnimationFrame.html" target="_blank">requestAnimationFrame</a></small><small>&nbsp;VS&nbsp;</small><small><a href="example/csstransition.html" target="_blank">csstransition</a></small>
+				</section>
+				<section>
+					<h3>간단하다</h3>
+					<p>CSS Transition을 이용하면 간단히 구현할수 있다.</p>
+<img src="image/transition.png" style="background-color:#fff;width:50%">
+<div class="exampletransition">
+	<div class="transition"></div>
+</div>
+						<pre><code>
+.transition { transition: margin-left 1s linear, background-color 2s ease 1s; }
+div.exampletransition:hover div.transition {
+	margin-left: 700px;
+	background-color: green;
+}
+</code></pre>
+				</section>
+				<section>
+					<h3>제어할수 있다.</h3>
+					<p>애니메이션 <span class="strong">중간 상태</span>를 지정할 수 있다.</p>
+<div class="exampleanimation">
+	<div class="ani"></div>
+</div>
+<pre><code data-trim>
+@keyframes slidein {
+  0% {
+    margin-left:100%;
+    width:300%;
+  }
+  75% {
+    font-size:300%;
+    margin-left:25%;
+    width:150%;
+  }
+  100% {
+    margin-left:0%;
+    width:100%;
+  }
+}
+
+.target {
+	animation-delay : 0;
+	animation-direction : normal; //normal, reverse, alternate, alternate-reverse
+	animation-duration : 3s;
+	animation-iteration-count : infinite;
+	animation-name : slidein;
+	animation-play-state :  running; // paused, running
+	animation-timing-function : linear;
+	animation-fill-mode : none; // none, forwards, backwards, both
+}
+</code></pre>
+				</section>
+				<section>
+					<h3>제어할수 있다.</h3>
+					<p>애니메이션 <span class="strong">진행상태</span>를 제어할수 있다.</p>
+					<p> <span class="semi-strong">animation(start/end/iteration)</span> 이벤트를 제공</p>
+<pre><code>
+var e = document.getElementById("watchme");
+// attach event
+e.addEventListener("animationstart", listener, false);
+e.addEventListener("animationend", listener, false);
+e.addEventListener("animationiteration", listener, false);
+
+// apply css animation
+e.className = "slidein";
+
+// event handler
+function listener(e) {
+  var l = document.createElement("li");
+  switch(e.type) {
+    case "animationstart":
+      l.innerHTML = "Started: elapsed time is " + e.elapsedTime;
+      break;
+    case "animationend":
+      l.innerHTML = "Ended: elapsed time is " + e.elapsedTime;
+      break;
+    case "animationiteration":
+      l.innerHTML = "New loop started at time " + e.elapsedTime;
+      break;
+  }
+  document.getElementById("output").appendChild(l);
+}
+</code></pre>
+				</section>
+				<section>
+					<h2>하지만....</h2>
+				</section>
+				<section>
+					<h3>기존의 모델로 <span class="strong">좋은 성능</span>의 애니메이션을</h3>
+					<h3>만드는 것은 어렵다</h3>
+					<ul>
+						<li>CSS style 변경에 따른 구조적 성능 이슈</li>
+						<li>Javascript 방식은 Main Thread를 점유하는 구조적인 문제</li>
+					</ul>
+				</section>
+				<section>
+					<h3>HTML5 애니메이션 기술들을 </h3>
+					<h3>효과적으로 쉽게  <span class="strong">제어</span>하기 어렵다.</h3>
+				</section>
+				<section data-background="#8c4738">
+					<h3>그래서 나왔다. 애니메이션의 종합판!</h3>
+					<br>
+					<h2 class="strong">Web Animation API</h2>
+				</section>
+				<section>
+					<h2>Web Animation API</h2>
+					<p>통합된 애니메이션 제어 모델을 제공하기 위한 자바스크립트 API</p>
+					<img src="image/CSS-SVG-Web-Animations.png" style="background-color: #fff"/>
+				</section>
+				<section>
+					<h2>Web Animation API</h2><br>
+					<ul>
+						<li>기존 애니메이션 모델들에 동기화된 <span class="strong">공용 Javascript API</span> 제공</li>
+						<li>기존 애니메이션 규격에서 처리하기 <span class="semi-strong">어려운 부분(Dynamic) 보완</span></li>
+						<li><span class="strong">구조적 성능 문제 개선</span></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Web Animation API 주요 기능</h2>
+					<ol>
+						<li>애니메이션의 <span class="semi-strong">재생방법의 제어</span></li>
+						<li>애니메이션의 <span class="semi-strong">동시적</span> 수행의 조합</li>
+						<li>애니메이션의 <span class="semi-strong">순차적</span> 수행의 조합</li>
+						<li>SVG 패스를 이용한 애니메이션 구현</li>
+					</ol>
+				</section>
+				<section  data-background="#8c4738">
+					<h2>Animation Basic</h2>
+					<p>Web Animation API Spec-1</p>
+				</section>
+				<section>
+					<h3>Element.animate()</h3>
+					<blockquote>Animation = Element.animate(Keyframes, duration)</blockquote>
+					<div class="playground">
+							<div id="code1" class="box"></div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>
+var player = document.getElementById("code1").animate([
+	{ transform: 'scale(1)', opacity: 1},
+	{ transform: 'scale(.5)', opacity: .5},
+	{ transform: 'scale(.667)', opacity: .667},
+	{ transform: 'scale(.6)', opacity: .6}
+], 3000);
+					</code></pre>
+				</section>
+				<section>
+					<h3>Element.animate()</h3>
+					<blockquote>Animation=Element.animate(Keyframes, <span class="semi-strong">AnimationEffectTiming</span>)</blockquote>
+					<p><span class="semi-strong">offset</span>을 이용하여 animation의 중간 단계를 지정할수 있다.</p>
+					<div class="playground">
+							<div id="code2" class="smallbox"></div>
+							<div style="height: 50px;float: left;width: 150px;margin-top: 170px;">
+								<button class="finish" onclick="player.cancel();">초기화</button>
+							</div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>player = document.getElementById("code2").animate([
+	{ offset: 0, transform: 'translate3d(0px,0px,0)' },
+	{ offset: 0.25, transform: 'translate3d(100px,0px,0)' },
+	{ offset: 0.5, transform: 'translate3d(100px,100px,0)' },
+	{ offset: 0.75, transform: 'translate3d(0,100px,0)' },
+	{ offset: 1, transform: 'translate3d(0,0px,0)' }
+], {
+	duration: 1500, //milliseconds
+	easing: "ease-in-out", // "linear", "ease", "ease-in", "ease-out" a bezier curve, etc.
+	delay: 10, //milliseconds
+	iterations: Infinity, //or a number
+	direction: 'alternate' //'normal', 'reverse', 'alternate', 'alternate-reverse' etc.
+});
+					</code></pre>
+				</section>
+				<section>
+					<h3>Animation 객체</h3>
+<small><a href="http://www.w3.org/TR/web-animations/#the-animation-interface">http://www.w3.org/TR/web-animations/#the-animation-interface</a></small>
+					<pre><code>
+interface Animation {
+             attribute AnimationEffectReadOnly effect;
+             attribute AnimationTimeline timeline;
+             attribute double startTime;
+             attribute double currentTime;
+             attribute double playbackRate;
+    readonly attribute AnimationPlayState playState;
+    readonly attribute Promise Animation ready;
+    readonly attribute Promise Animation finished;
+    void cancel ();
+    void finish ();
+    void play ();
+    void pause ();
+    void reverse ();
+};
+
+enum AnimationPlayState { "idle", "pending", "running", "paused", "finished" };
+</code></pre>
+				</section>
+				<section>
+					<h3>Animation 객체</h3>
+					<p>Animation <span class="strong">동작상태</span>를 조절할수 있다.</p>
+					<div class="playground">
+							<div id="code3" class="box" style="left:25px"></div>
+							<div style="height: 200px;float: left;width: 200px;margin-top: 170px;">
+								<button class="play" onclick="player.play();">player.play()</button>
+								<button class="pause" onclick="player.pause();">player.pause()</button>
+								<button class="cancel" onclick="player.cancel();">player.cancel()</button>
+								<button class="finish" onclick="player.finish();">player.finish()</button>
+								<button class="finish" onclick="document.getElementById('code3').innerHTML = player.playState;">player.playState</button>
+							</div>
+					</div>
+					<pre style="width:75%;float:right;margin:0"><code contenteditable>player = document.getElementById("code3").animate([
+	{ offset: 0, transform: 'scale(1)', opacity: 1 },
+	{ offset: 0.3, transform: 'scale(.5)', opacity: 0.5 },
+	{ offset: 0.7875, transform: 'scale(.667)', opacity: 0.667 },
+	{ offset: 1, transform: 'scale(.6)', opacity: 0.6 }
+], {
+	duration: 1500, //milliseconds
+	easing: "ease-in-out", // "linear", "ease", "ease-in", "ease-out" a bezier curve, etc.
+	delay: 10, //milliseconds
+	iterations: Infinity, //or a number
+	direction: 'alternate' //'normal', 'reverse', 'alternate', 'alternate-reverse' etc.
+});</code></pre>
+				</section>
+				<section>
+					<h3>Animation 객체</h3>
+					<p><span class="strong">playbackRate, currentTime</span>으로 Timeline을 조절할수 있다.</p>
+					<div class="playground">
+							<div id="code3_1" class="smallbox" style="left:25px"></div>
+							<div style="height: 200px;float: left;width: 200px;margin-top: 170px;">
+								<button class="cancel" onclick="player.finish();">player.finish()</button>
+								<!-- <button class="pause" onclick="player.pause();">player.pause()</button> -->
+								<label style="font-size:0.5em">player.playbackRate</label><input id="pbr" type="range" min="0" max="10" step="0.1" value="1" onchange="document.getElementById('inval').innerHTML = player.playbackRate = document.getElementById('pbr').value; "><div id="inval" style="font-size:0.5em">1</div>
+								<label style="font-size:0.5em">player.currentTime</label><input id="timeline" type="range" min="0" max="5000" step="1" value="1" onchange="document.getElementById('timelineval').innerHTML = player.currentTime = document.getElementById('timeline').value; "><div id="timelineval" style="font-size:0.5em">1</div>
+							</div>
+					</div>
+					<pre style="width:75%;float:right;margin:0"><code contenteditable>player = document.getElementById("code3_1").animate([
+	{ offset: 0, transform: 'translate3d(0px,0px,0)' },
+	{ offset: 0.25, transform: 'translate3d(100px,0px,0)' },
+	{ offset: 0.5, transform: 'translate3d(100px,100px,0)' },
+	{ offset: 0.75, transform: 'translate3d(0,100px,0)' },
+	{ offset: 1, transform: 'translate3d(0,0px,0)' }
+], {
+	duration: 5000, //milliseconds
+	easing: 'ease-in-out', //'linear', a bezier curve, etc.
+	iterations: 1000, //or a number
+	direction: 'normal', //'normal', 'reverse', 'alternate' etc.
+});</code></pre>
+				</section>
+				<section>
+					<h3>Promise 지원</h3>
+					<div class="playground">
+							<div id="code4" class="box" style="left:25px"></div>
+							<div style="height: 200px;float: left;width: 200px;margin-top: 170px;">
+								<button class="cancel" onclick="player.cancel();">player.cancel()</button>
+								<button class="finish" onclick="player.finish();">player.finish()</button>
+								<div id="mcode4" class="message"></div>
+							</div>
+					</div>
+					<pre style="width:75%;float:right;margin:0"><code contenteditable>player = document.getElementById("code4").animate([
+	{ offset: 0, transform: 'scale(1)', opacity: 1 },
+	{ offset: 0.3, transform: 'scale(.5)', opacity: 0.5 },
+	{ offset: 0.7875, transform: 'scale(.667)', opacity: 0.667 },
+	{ offset: 1, transform: 'scale(.6)', opacity: 0.6 }
+], {
+	duration: 1500, //milliseconds
+	easing: "ease-in-out", // "linear", "ease", "ease-in", "ease-out" a bezier curve, etc.
+	delay: 10, //milliseconds
+	iterations: 1000, //or a number
+	direction: 'alternate' //'normal', 'reverse', 'alternate', 'alternate-reverse' etc.
+});
+
+var message = document.getElementById("mcode4");
+
+// ready promise
+player.ready.then(function(value) {
+	message.innerHTML += "[성공] 애니메이션 시작" + "&lt;br&gt;";
+}, function(reason) {
+	message.innerHTML += "[실패] 애니메이션 시작" + "&lt;br&gt;";
+});
+
+// finished promise
+player.finished.then(function(value) {
+	message.innerHTML += "[성공] 애니메이션 종료" + "&lt;br&gt;";
+}, function(reason) {
+	message.innerHTML += "[실패] 애니메이션 종료" + "&lt;br&gt;";
+});
+
+var str=message.innerHTML;
+</code></pre>
+				</section>
+				<section  data-background="#8c4738">
+						<h2>Multiple Animation</h2>
+						<p>Web Animation API Spec-2</p>
+				</section>
+				<section>
+					<h2>Timeline Model</h2>
+					<img src="image/time-hierarchy-no-groups.svg" height="500px"/>
+				</section>
+				<section>
+					<h3>AnimationTimeline 객체</h3>
+					<small><a href="http://www.w3.org/TR/web-animations/#animationtimeline">http://www.w3.org/TR/web-animations/#animationtimeline</a></small>
+					<p>Animation의 timeline을 관리함</p>
+					<pre><code>
+interface AnimationTimeline {
+    readonly attribute double currentTime;
+    sequence Animation getAnimations();
+};
+
+[Constructor (DOMHighResTimeStamp originTime)]
+interface DocumentTimeline : AnimationTimeline {
+    void play();
+};
+					</code></pre>
+				</section>
+				<section>
+					<h3>AnimationTimeline 객체</h3>
+					<p>실행 중인 Animation 애니메이션을 얻음</p>
+<pre><code>var players = document.timeline.getAnimations();
+players.forEach(function(player, i, ra) {
+      //player.pause();
+      //player.play();
+});
+</code></pre>
+					<iframe height='268' scrolling='yes' src='https://codepen.io/danwilson/embed/PqgKVK/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/danwilson/pen/PqgKVK/'>Pause All those Random Dots!</a> by Dan Wilson (<a href='https://codepen.io/danwilson'>@danwilson</a>) on <a href='http://codepen.io'>CodePen</a></iframe>
+				</section>
+				<section>
+					<h3>AnimationTimeline 객체</h3>
+					<p>선언된 Animation Effect를 <span class="strong">Timeline으로 관리</span>한다.</p>
+<pre><code>document.timeline.currentTime;</code></pre>
+<pre><code>var animation = document.timeline.play(effect);</code></pre><br>
+						<p>Animation 객체를 반환하여 애니메이션 제어가 가능하다</p>
+				</section>
+				<section  data-background="#8c4738">
+					<h2>Animation Effects</h2>
+				</section>
+				<section>
+					<h3>KeyframeEffects</h3>
+					<p>Element.animation과 유사하나, 선언시 바로 실행되지 않는다.</p>
+					<div class="playground">
+							<div id="code5" class="box" style="left:25px"></div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>
+// define
+var effect = new KeyframeEffect(document.getElementById("code5"),
+  [
+    { opacity: 1 },
+    { opacity: 0 }
+  ], {
+    duration: 1000
+  });
+
+// play
+document.timeline.play(effect);
+
+/*
+document.getElementById("code5").animate(
+  [
+    { opacity: 1 },
+    { opacity: 0 }
+  ], {
+    duration: 1000
+  });
+ */
+</code></pre>
+				</section>
+				<section>
+					<h3>동시에 애니메이션 동작하기</h3>
+					<div class="playground">
+							<div id="old1" class="box" style="left:25px">old1</div>
+							<div id="old2" class="box" style="left:25px; top:160px; background-color: #862920">old2</div>
+							<div id="old3" class="box" style="left:25px; top:320px; background-color: #248921">old3</div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code>#old1 { transition: opacity 1s ease;}
+#old2 { transition: opacity 1s ease;}
+#old3 { transition: opacity 1s ease;}
+.fade { opacity:0; }
+</code></pre>
+					<br><br><br>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>var els = [ document.getElementById("old1"),
+	document.getElementById("old2"),
+	document.getElementById("old3") ];
+
+els.forEach(function(v,i) {
+	v.classList.add("fade");
+});
+</code></pre>
+				</section>
+				<section>
+					<h3>GroupEffects</h3>
+					<p>Group 단위로 애니메이션을 제어할수 있다.</p>
+					<p>Keyframe/Group/SequenceEffect를 포함할 수 있다.</p>
+					<div class="playground">
+							<div id="code6" class="box" style="left:25px"></div>
+							<div id="code7" class="box" style="left:25px; top:160px; background-color: #862920"></div>
+							<div id="code8" class="box" style="left:25px; top:320px; background-color: #248921"></div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>
+// define
+var keyframe = [
+  { opacity: 1 },
+  { opacity: 0 }
+];
+
+var timings = {
+  duration: 1000,
+  easing : "ease",
+  fill : "both"
+}
+
+// define animation effect
+var group = new GroupEffect([
+   new KeyframeEffect(document.getElementById("code6"), keyframe, timings),
+   new KeyframeEffect(document.getElementById("code7"), keyframe, timings),
+   new KeyframeEffect(document.getElementById("code8"), keyframe, timings)
+]);
+document.timeline.play(group);
+					</code></pre>
+				</section>
+				<section>
+						<h3>순차적으로 애니메이션 동작하기</h3>
+						<p>지연 시간을 이용한 애니메이션 호출</p>
+						<div class="playground">
+						    <div id="old4" class="box" style="left:25px">old4</div>
+						    <div id="old5" class="box" style="left:25px; top:160px; background-color: #862920">old5</div>
+						    <div id="old6" class="box" style="left:25px; top:320px; background-color: #248921">old6</div>
+						</div>
+						<pre style="width:80%;float:right;margin:0"><code>#old4 { transition: opacity 1s ease;}
+#old5 { transition: opacity 1s ease 1s;}
+#old6 { transition: opacity 1s ease 2s;}
+.fade { opacity:0; }
+</code></pre>
+						<br><br><br>
+						<pre style="width:80%;float:right;margin:0"><code contenteditable>var els = [ document.getElementById("old4"),
+	document.getElementById("old5"),
+	document.getElementById("old6") ];
+
+els.forEach(function(v,i) {
+	v.classList.add("fade");
+});
+</code></pre>
+				</section>
+				<section>
+					<h3>SequenceEffect</h3>
+					<p>순차적 애니메이션의 조합</p>
+					<div class="playground">
+							<div id="code9" class="box" style="left:25px"></div>
+							<div id="code10" class="box" style="left:25px; top:160px; background-color: #862920"></div>
+							<div id="code11" class="box" style="left:25px; top:320px; background-color: #248921"></div>
+					</div>
+					<pre style="width:80%;float:right;margin:0"><code contenteditable>
+// define
+var keyframe = [
+  { opacity: 1 },
+  { opacity: 0 }
+];
+
+var timings = {
+  duration: 1000,
+  easing : "ease",
+  fill : "both"
+}
+
+// define animation effect
+var sequence = new SequenceEffect([
+   new KeyframeEffect(document.getElementById("code9"), keyframe, timings),
+   new KeyframeEffect(document.getElementById("code10"), keyframe, timings),
+   new KeyframeEffect(document.getElementById("code11"), keyframe, timings)
+]);
+document.timeline.play(sequence);
+					</code></pre>
+				</section>
+				<section>
+					<h3>Multiple Animation 제작 순서</h3>
+					<br>
+					<ol>
+						<li class="fragment">KeyframeEffect를 만든다.</li>
+						<li class="fragment">KeyframeEffect를 제어가 가능한 형태로 <span class="strong">조합</span>한다</li>
+						<li class="fragment">AnimationTimeline 객체를 이용하여 <span class="strong">애니메이션을 동작</span>한다.</li>
+					</ol>
+				</section>
+					<section>
+						<h3>Multiple Animation 활용 예</h3>
+						<pre><code>var sEffectA = new SequenceEffect([
+	new KeyframeEffect(el, keyframe, timings);
+]);
+var sEffectB = new SequenceEffect([
+	new KeyframeEffect(el, keyframe, timings);
+]);
+var gEffectC = new GroupEffect([sEffectA, sEffectB]);
+var animation = document.timeline.play(gEffectC);
+</code></pre>
+						<iframe height='268' scrolling='no' src='https://codepen.io/danwilson/embed/vNYQLL/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/danwilson/pen/vNYQLL/'>vNYQLL</a> by Dan Wilson (<a href='https://codepen.io/danwilson'>@danwilson</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+					</section>
+
+				</section>
+				<section>
+					<h2>Motion Path</h2>
+					<p>Motion path를 따라가는 animation 구현도 가능</p>
+					<pre><code style="word-wrap: break-word;">.target {
+	motion-path: path('M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z');
+}</code></pre>
+				</section>
+				<section>
+					<iframe height='268' scrolling='no' src='https://codepen.io/danwilson/embed/MwLmby/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/danwilson/pen/MwLmby/'>Motion Path Infinity</a> by Dan Wilson (<a href='https://codepen.io/danwilson'>@danwilson</a>) on <a href='https://codepen.io'>CodePen</a></iframe>
+					<iframe height='400' scrolling='no' src='https://codepen.io/danwilson/embed/ZGmeRO/?height=400&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/danwilson/pen/ZGmeRO/'>CSS Motion Path Spiral</a> by Dan Wilson (<a href='https://codepen.io/danwilson'>@danwilson</a>) on <a href='http://codepen.io'>CodePen</a></iframe>
+				</section>
+				<section>
+					<h3>브라우저 지원 범위</h3>
+					<img src="image/support.png">
+					<small><a href="http://caniuse.com/#feat=web-animation">http://caniuse.com/#feat=web-animation</a></small>
+				</section>
+				<section>
+					<h3>Chrome 45 지원범위</h3>
+					<p>Web Animation <span class="strong">Spec-1 구현 완료</span>, <span class="strong">Spec-2 일부 구현</span></p>
+					<small><span class="semi-strong">#Enable Experimental Web Platform Feature</span> 활성화 적용시</small>
+					<iframe height='468' scrolling='no' src='https://codepen.io/danwilson/embed/xGBKVq/?height=468&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/danwilson/pen/xGBKVq/'>WAAPI Browser Support Test</a> by Dan Wilson (<a href='https://codepen.io/danwilson'>@danwilson</a>) on <a href='http://codepen.io'>CodePen</a></iframe>
+				</section>
+				<section>
+					<h3>web-animations-js polifil</h3>
+					<p>https://github.com/web-animations/web-animations-js</p>
+					<iframe src="https://web-animations.github.io/web-animations-demos/" width="100%" height="500px"></iframe>
+				</section>
+				<section>
+					<h2>Web Animation API</h2>
+					<iframe src="https://web-animations.github.io/web-animations-demos/globe/" width="100%" height="500px"></iframe>
+				</section>
+				<section>
+					<h2>Reference</h2>
+					<ul style="font-size:24px;line-height:35px">
+						<li>
+							W3C Specification<br>
+							<a href="http://w3c.github.io/web-animations/" target="_new">http://w3c.github.io/web-animations/</a>
+						</li>
+						<li>
+							Chrome Enchanted: 2014년 주목할만한 HTML5 규격 4종<br>
+							<a href="http://cwdoh.com/html5/2014/08/18/chrome-enchanted-notable-html5-specs-in-2014/" target="_new">http://cwdoh.com/html5/2014/08/18/chrome-enchanted-notable-html5-specs-in-2014/</a>
+						</li>
+						<li>
+							Let’s talk about the Web Animations API<br>
+							<a href="http://danielcwilson.com/blog/2015/07/animations-intro/" target="_new">http://danielcwilson.com/blog/2015/07/animations-intro/</a>
+						</li>
+						<li>
+							CSS 애니메이션과 JavaScript 애니메이션 비교<br>
+							<a href="https://developers.google.com/web/fundamentals/look-and-feel/animations/css-vs-javascript" target="_new">https://developers.google.com/web/fundamentals/look-and-feel/animations/css-vs-javascript</a>
+						</li>
+						<li>
+							Web Animations API Polyfill<br>
+							<a href="https://github.com/web-animations/web-animations-js" target="_new">https://github.com/web-animations/web-animations-js</a>
+						</li>
+						<li>
+							Silky smooth Web Animations<br>
+							<a href="https://www.youtube.com/watch?v=ep0_0W0qWsc" target="_new">https://www.youtube.com/watch?v=ep0_0W0qWsc</a>
+						</li>
+						<li>
+							How to use the animations API to create some Material Design animations<br>
+							<a href="https://io2015codelabs.appspot.com/codelabs/web-animations-transitions-playbackcontrol#1" target="_new">https://io2015codelabs.appspot.com/codelabs/web-animations-transitions-playbackcontrol#1</a>
+						</li>
+					</ul>
+				</section>
+				<section  data-background="image/dynamic_thank_blue.jpg">
+					<h2 style="color:#DE4182">감사합니다.</h2>
+					<br>
+					<h3 style="color:#268bd2">BY <a style="color:rgb(35,0,172)" href="http://sculove.github.io/blog/">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// https://github.com/iamvdo/Reveal-liveCoding
+					{ src: '../__lib__/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script>
+$("code[contenteditable]").focusout(function(e) {
+	var $el = $(e.target);
+	eval($el.text());
+});
+		</script>
+	</body>
+</html>
+
+

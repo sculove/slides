@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ko">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JQuerySF 2015</title>
+
+		<meta name="description" content="JQuerySF 2015">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+		<script src="jquery-1.11.3.min.js"></script>
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+            textarea { width:90%;position:relative;dispaly:block;font-size:0.55em;background-color:#3F3F3F; color:#fff;font-family: monospace;
+                line-height: 1.2em;
+                word-wrap: break-word;
+                box-shadow: 0px 0px 6px rgba(0,0,0,0.3); }
+            code {
+            	margin:0px;
+            	padding:0px;
+            }
+
+            .code {
+                position:relative;
+            }
+
+            .code > button {
+                font-family: "Nanum Gothic";
+                margin: 0 0 10px 15px;
+                padding: .3em;
+                font-size:.6em;
+                margin: 0 2px;
+                background-color: #0A5AFA;
+                width: 120px;
+                color: #fff;
+                position: absolute;
+                display: block;
+                border: none;
+                top: 1px;
+                left: 853px;
+                opacity: .4;
+                z-index: 1; }
+
+            .code > button:hover {
+                opacity: 1; }
+
+            button {
+                width: 180px;
+                height: 40px;
+                font-size: 20px; }
+
+            .f_left { float:left }
+
+            p.content {
+                font-size: 28px; }
+
+            .emphasize {
+                /*color: #81FFDC; */
+                color: #FF5E99 !important;
+            }
+
+            .semi-emphasize {
+            	color : #24E566 !important;
+            }
+
+            .reveal section ul {
+                list-style:square;
+                font-size:25px; }
+
+            .reveal .l_none { list-style: none; }
+            .reveal li.l_title { margin-left: -20px; }
+
+            .reveal .txt_28 { font-size: 28px }
+            .reveal .reload_btn {
+                border-radius: 15px;
+                background-color: transparent;
+                border: solid 4px #fff;
+                color: #fff;
+                font-weight: bold; }
+
+             .reveal section img {
+			margin: 0px 0px;
+		}
+
+		blockquote {
+            	width : 90% !important;
+            }
+		.carousel {
+			position: absolute;
+			left:0px;
+			top:-470px;
+			list-style-type: none;
+			display: block;
+			margin: 0 auto;
+			padding: 0;
+			list-style: none !important;
+		}
+
+		.carousel li {
+		  float:left;
+		  width: 150px;
+		  color: black;
+		  text-align: center;
+		  margin: 0px;
+		}
+
+		.carousel li h4{
+			line-height: 40px;
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-transition="linear" data-background="image/goldenb.jpg" data-background-transition="slide">
+					<!-- <h3><img src="image/jindo.png"><br> TO <br><img src="image/jquery_logo.png"></h3> -->
+					<h1 style="text-shadow: 2px 2px #000;">jQuerySF<span class="emphasize"> 2015</span></h1>
+					<small>June. 22 - 23</small>
+					<br><br>
+					<p>
+						<small style="text-shadow: 2px 2px #000;">Created by <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<!-- <section>
+					<img src="image/regency.jpg" width="80%"><br><br>
+					<p>The Regency Ballroom</p>
+					<div style="position:absolute; width:100%; top:50%;" class="fragment">
+						<img src="image/black.jpg">
+					</div>
+				</section> -->
+				<section>
+					<img src="image/myles_borins.jpg"><br><br>
+					<h3>Myles Borins</h3>
+				</section>
+				<section>
+					<section data-background="image/17032.jpg">
+					<div class="fragment">
+					<span style="display:inline-block">
+						<img src="image/adam.jpg" height="388"><br><br>
+						<h3>Adam j. Sontag</h3>
+					</span>
+					<span style="display:inline-block">
+						<img src="image/raquel.jpeg" height="388"><br><br>
+						<h3>Raquel Velez</h3>
+					</span>
+					</div>
+					</section>
+					<section  data-background="image/17034.jpg">
+    <ul class="carousel">
+        <li>
+            <img src="image/ebryn.jpg"><h4>Erik Bryn</h4>
+        </li>
+        <li>
+            <img src="image/mgonto.jpg"><h4>Martin Gonto</h4>
+        </li>
+        <li>
+            <img src="image/floydophone.jpg"><h4>Pete Hunt</h4>
+        </li>
+        <li>
+            <img src="image/zqzoltan.jpg"><h4>Zoltan Olah</h4>
+        </li>
+        <li>
+            <img src="image/jade.jpg"><h4>Jade Wang</h4>
+        </li>
+        <li>
+            <img src="image/estark37.jpg"><h4>Emily Stark</h4>
+        </li>
+        <li>
+            <img src="image/amanda.jpg"><h4>Amanda Glosson</h4>
+        </li>
+        <li>
+            <img src="image/john.jpg"><h4>John Resig</h4>
+        </li>
+        <li>
+            <img src="image/kelly.jpg"><h4>Kelly King</h4>
+        </li>
+        <li>
+            <img src="image/karo.jpg"><h4>Karo Caran</h4>
+        </li>
+        <li>
+            <img src="image/jkup.jpg"><h4>Jon Kuperman</h4>
+        </li>
+        <li>
+            <img src="image/victor.jpg"><h4>Victor Tsaran</h4>
+        </li>
+        <li>
+            <img src="image/steve.jpg"><h4>Steve Newcomb</h4>
+        </li>
+        <li>
+            <img src="image/ariya.jpg"><h4>Ariya Hidayat</h4>
+        </li>
+        <li>
+        	<img src="image/mike.jpg"><h4>Mike Sherov</h4>
+        </li>
+        <li>
+            <img src="image/substack.png"><h4>James Halliday</h4>
+        </li>
+        <li>
+            <img src="image/james.png"><h4>James Kyle</h4>
+        </li>
+        <li>
+            <img src="image/lin.jpg"><h4>Lin Clark</h4>
+        </li>
+        <li>
+            <img src="image/jason.jpg"><h4>Jason Laster</h4>
+        </li>
+        <li>
+            <img src="image/rey.jpg"><h4>Rey Bango</h4>
+        </li>
+        <li>
+            <img src="image/sarah.jpg"><h4>Sarah Frisk</h4>
+        </li>
+        <li>
+            <img src="image/mdo.jpg"><h4>Mark Otto</h4>
+        </li>
+        <li>
+            <img src="image/brandon.jpg"><h4>Brandon Arnold</h4>
+        </li>
+        <li>
+            <img src="image/bcrypt.jpg"><h4>Yan</h4>
+        </li>
+        <li>
+            <img src="image/jdd.jpg"><h4>John-David Dalton</h4>
+        </li>
+        <li>
+           <img src="image/thisisjohnbrown.jpg"><h4>John Brown</h4>
+        </li>
+        <li>
+            <img src="image/ben.png"><h4>Ben Purdy</h4>
+        </li>
+        <li>
+            <img src="image/mikeal.png"><h4>Mikeal Rogers</h4>
+        </li>
+    </ul>
+					</section>
+				</section>
+				<section>
+					<section data-background="image/jquerysf.png">
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h1 style="float:left"><img src="image/jqsf-logo.svg" width="300"></h1>
+						<br><br>
+						<div style="clear:both; float:left; margin-left:30px" class="fragment">
+							<h4 class="desc_target" style="text-align: left;">FRAMEWORK</h4>
+							<h4 style="text-align: left;">THE FULL STACK</h4>
+							<h4 class="desc_target" style="text-align: left;">EMPATHIZE</h4>
+							<h4 style="text-align: left;">ACCESSIBLE</h4>
+							<h4 class="desc_target" style="text-align: left;">AST</h4>
+							<h4 style="text-align: left;">BROWSER DEVELOPER TOOLS</h4>
+							<h4 style="text-align: left;">CSS</h4>
+							<h4 style="text-align: left;">WILDCARD</h4>
+						</div>
+						<div  id="list_after" class="fragment" style="display:none"></div>
+					</section>
+				</section>
+				<section data-background="image/jquerysf.png">
+					<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+					<section>
+						<h2>FRAMEWORK</h2>
+						<br><br>
+						<div style="clear:both;" class="fragment">
+							<h3>Ember 2.0</h3>
+							<h3>Angularjs 2.0</h3>
+							<h3>React</h3>
+						</div>
+					</section>
+					<section>
+						<h2>Ember 2.0</h2>
+						<p>1.0 : Assembly required<br>
+						2.0 : ember-cli. command</p>
+						<img src="image/include_test.png" width="80%">
+					</section>
+				</section>
+				<section data-background="image/jquerysf.png">
+					<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+					<section>
+						<h2>EMPATHIZE</h2>
+						<h3>User-centric Development in the Early Days of jQuery</h3>
+						<img src="image/john.jpg"  width="300px"><br><br>
+						<p class="fragment">2006, document, naming, homepage, (download, license, getting start tutorial), API design (easy), Community Resource (IRC, stack overflow, twitter,….)</p>
+					</section>
+				</section>
+
+				<section data-background="image/jquerysf.png">
+					<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+					<section>
+						<h2>AST (Abstract Syntex Tree)</h2>
+						<a href="http://int3.github.io/metajs/" target="_blank">http://int3.github.io/metajs/</a>
+					</section>
+					<section>
+						<h2>JS Parser - Esprima</h2>
+						<p>execution - static analysis - transformation</p>
+						<iframe src="https://esprima.org/demo/parse" width="100%" height="500px"></iframe>
+					</section>
+				</section>
+				<section data-background="#8c4738">
+					<h2>AST 활용</h2>
+				</section>
+				<section>
+					<section>
+						<h2>1. Style checking - JSCS</h2>
+						<p>coding convention</p>
+						<a href="http://docs.navercorp.com/coding-convention/js.html" target="_blank">http://docs.navercorp.com/coding-convention/js.html</a>
+						<br><br>
+						<img src="image/jscs.png"/>
+					</section>
+					<section>
+						<h2>2. Polyfill, ES6, JSX - Babel</h2>
+						<p>Use next generation JavaScript, today.</p>
+						<img src="image/babel.png"/>
+						<img src="image/babel_compile.png"/>
+					</section>
+					<section>
+						<h2>3. Dependency Merge - browserify</h2>
+						<o>Browserify parses the AST for require() calls to traverse the entire dependency graph of your project.</p>
+						<img src="image/browserify_logo.png" width="300px"/>
+						<img src="image/browserify.png"/><br><br>
+						<img src="image/br_cmd.png"/><br><br>
+						<img src="image/br_buldle.png"/>
+					</section>
+				</section>
+				<section data-background="image/17022.jpg">
+					<h3>그 외...사람들</h3>
+
+					<p>Developer (Framework, IE, Attitude, culture, tools, ...)</p>
+				</section>
+				<section>
+					<h1>Contributor or not ?</h1>
+				</section>
+				<section>
+					<a href="http://jquerysf.com/" target="_blank">http://jquerysf.com/</a>
+					<iframe src="https://jquerysf.com/" width="100%" height="600px"></iframe>
+				</section>
+
+				<section  data-background="image/sunshine.jpg"><br><br>
+					<h2 style="text-shadow: 2px 2px #000">감사합니다.</h2>
+					<br>
+					<h3 style="text-shadow: 2px 2px #000">BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+				try {
+					var id = event.fragment.getAttribute("id");
+					var el = document.getElementById(id.substring(0, id.indexOf("_after")));
+					// console.log("shown",id,el);
+					switch(id) {
+						case "list_after" :
+							$(".desc_target").addClass("emphasize");
+							break;
+					}
+				} catch(e) {
+					// console.log(e);
+				}
+			} );
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+				try{
+					var id = event.fragment.getAttribute("id");
+					var el = document.getElementById(id.substring(0, id.indexOf("_after")));
+					// console.log("hidden",id, el);
+					switch(id) {
+						case "list_after" :
+							$(".desc_target").removeClass("emphasize");
+							break;
+					}
+				} catch(e) {
+					// console.log(e);
+				}
+			} );
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Jindo To jQuery</title>
+
+		<meta name="description" content="Jindo To jQuery">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+            textarea { width:90%;position:relative;dispaly:block;font-size:0.55em;background-color:#3F3F3F; color:#fff;font-family: monospace;
+                line-height: 1.2em;
+                word-wrap: break-word;
+                box-shadow: 0px 0px 6px rgba(0,0,0,0.3); }
+            code {
+            	margin:0px;
+            	padding:0px;
+            }
+
+            .code {
+                position:relative;
+            }
+
+            .code > button {
+                font-family: "Nanum Gothic";
+                margin: 0 0 10px 15px;
+                padding: .3em;
+                font-size:.6em;
+                margin: 0 2px;
+                background-color: #0A5AFA;
+                width: 120px;
+                color: #fff;
+                position: absolute;
+                display: block;
+                border: none;
+                top: 1px;
+                left: 853px;
+                opacity: .4;
+                z-index: 1; }
+
+            .code > button:hover {
+                opacity: 1; }
+
+            button {
+                width: 180px;
+                height: 40px;
+                font-size: 20px; }
+
+            .f_left { float:left }
+
+            p.content {
+                font-size: 28px; }
+
+            .emphasize {
+                /*color: #81FFDC; */
+                color: #FF5E99 !important;
+            }
+
+            .semi-emphasize {
+            	color : #24E566 !important;
+            }
+
+            .reveal section ul {
+                list-style:square;
+                font-size:25px; }
+
+            .reveal .l_none { list-style: none; }
+            .reveal li.l_title { margin-left: -20px; }
+
+            .reveal .txt_28 { font-size: 28px }
+            .reveal .reload_btn {
+                border-radius: 15px;
+                background-color: transparent;
+                border: solid 4px #fff;
+                color: #fff;
+                font-weight: bold; }
+
+             .reveal section img {
+			margin: 0px 0px;
+		}
+
+		blockquote {
+            	width : 90% !important;
+            }
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-transition="linear" data-background="image/finishToStart.jpg" data-background-transition="slide">
+					<!-- <h3><img src="image/jindo.png"><br> TO <br><img src="image/jquery_logo.png"></h3> -->
+					<h1 style="text-shadow: 2px 2px #000;">Jindo <span class="emphasize">To</span> jQuery</h1>
+					<br>
+					<p>
+						<small style="text-shadow: 2px 2px #000;">Created by <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<section data-background="image/2004naver.jpg">
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h2 style="float:left">2004년</h2>
+						<div style="clear:both; float:left"  >
+							<h4 class="fragment"  style="text-align: left;">네이버 검색시장 1위</h4>
+							<h4 class="fragment"  style="text-align: left;"><img src="image/jindo.png"><span>의 탄생</span></h4>
+						</div>
+						<div style="clear:both;"></div>
+						<br><br><br><br><br><br><br>
+						<div style="text-align: left;text-shadow: 2px 2px #000;" class="fragment semi-emphasize">
+						네이버와 함께 성장한 Jindo
+						</div>
+						<div style="text-align: left;text-shadow: 2px 2px #000;" class="fragment semi-emphasize">
+					      그리고 jQuery에 대한 이야기를 하려고 합니다.
+						</div>
+					</section>
+
+				</section>
+				<section>
+					<section data-background="#8c4738">
+						<h1>Jindo</h1>
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>JavaScript Library 춘추전국시대</h3><br>
+						<img src="image/yui.png">
+						<img src="image/prototypejs.png">
+						<img src="image/jquery.png">
+						<img src="image/mootools.png">
+						<img src="image/dojo.png">
+						<img src="image/extjs.png">
+						<!-- jindo1<img src="image/jindo_logo.png"> -->
+						<!-- <img src="image/beforeJquery.png"> -->
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>JavaScript Library 춘추전국시대</h3>
+						<small><a href="http://www.google.com/trends/explore#cat=0-5-31-733&q=Prototype%2C%20%2Fm%2F0bj6c0%2C%20%2Fm%2F0268gyp%2C%20YUI%2C%20MooTools&date=1%2F2004%2048m&cmpt=q&tz=">2004년 ~ 2007년 Google Trend</a></small><br>
+						<img id="beforeJquery" src="image/beforeJquery1.png">
+						<div id="beforeJquery_after" class="fragment" style="display:none"></div>
+					</section>
+					<section>
+						<h2>Prototype</h2>
+						<small><a href="http://prototypejs.org/">http://prototypejs.org</a></small><br>
+						<br>
+						<div style="float:left;width:20%">
+							<img src="image/samstephenson.jpeg" >
+						</div>
+						<div style="float:left;margin-left:10px">
+							<p>Sam Stephenson이 개발</p>
+							<p>
+							친숙한 Class 스타일의 OO framework
+							</p>
+							<hr>
+							<ul>
+								<li class="fragment">$, $$, $A, $F, $H, $R, $w 과 같은 유틸리티 함수</li>
+								<li class="fragment">Ajax, Class, Element, Form, Hash, Selector, Template 등 자체 클래스</li>
+								<div  id="fixproblem" style="color:red; font-weight: bold;">
+									<li style="color:rgb(147, 161, 161)" class="fragment">Array, Function, Number, Object, String 등 built-in 클래스 확장</li>
+								</div>
+							</ul>
+						</div>
+						<div style="clear:both"></div>
+						<br>
+						<blockquote class="fragment">
+							<div><span class="semi-emphasize">2004년</span> Prototype의 영향을 받은 <span class="emphasize">Jindo1</span> 출시 </div>
+							<div id="fixproblem_after" class="fragment" style="disply:none"></div>
+							<div class="fragment" ><span class="semi-emphasize">2007년</span> 기존 문제점을 개선한 <span class="emphasize">Jindo2</span> 출시</div>
+						</blockquote>
+					</section>
+					<section>
+						<h3><span class="semi-emphasize">2007년 이후</span>로 네이버 서비스를</h3>
+						<h3><img src="image/jindo.png"><span>로 개발하기 시작</h3>
+
+						<br><p class="fragment">서비스 경험을 바탕으로 Jindo 제품군 출시</p>
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>2008년 <a href="#">SmartEditor</a></h3>
+						<p>블로그, 카페 시즌2</p>
+						<img src="image/smarteditor.png">
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>2010년 <a href="#">Jindo Component</a></h3>
+						<p>네이버 PC 서비스에 적용</p>
+						<img src="image/naverpc.png">
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>2011년 <a href="#">Jindo Mobile Component</a></h3>
+						<p>네이버 모바일 서비스에 적용</p>
+						<img src="image/navermobile.png">
+					</section>
+					<section>
+						<h3>네이버 서비스의 <span class="emphasize">85%</span>가 사용</h3>
+						<small><a href="http://jindo.nhncorp.com:6248">http://jindo.nhncorp.com:6248</a></small><br>
+						<img src="image/naverservice.png">
+					</section>
+					<section>
+						<h3>네이버뿐만 아니라 <span class="emphasize">외부</span>에서도 사용</h3>
+						<img style="margin-top:20px" src="image/extservice.png">
+					</section>
+					<section data-background="#8c4738">
+						<h3>하지만...<br><br> 시대적 흐름을 막을순 없었다</h3>
+					</section>
+					<section>
+						<h3>YUI 개발 중단 발표</h3>
+						<small><a href="http://yahooeng.tumblr.com/post/96098168666/important-announcement-regarding-yui">2014년 8월 29일. Important announcement regarding YUI</a></small>
+						<img src="image/yuistop.png">
+						<br><br>
+						<h4>we have made the difficult decision to immediately stop all new development on YUI<br>in order to focus our efforts on this new technology landscape.</h4>
+					</section>
+				</section>
+				<section>
+					<section data-background="#8c4738">
+						<h1>jQuery</h1>
+					</section>
+					<section>
+						<!-- style="-webkit-transform: translate(-50%, -50%);position: absolute;left: 50%;top: 50%;"  -->
+						<h3>JavaScript Library</h3>
+						<small id="afterJquery_after" class="fragment"><a href="http://www.google.com/trends/explore#cat=0-5-31-733&q=Prototype%2C%20%2Fm%2F0bj6c0%2C%20%2Fm%2F0268gyp%2C%20YUI%2C%20MooTools&date=1%2F2008%2084m&cmpt=q&tz=">2008년 ~ 2014년 Google Trend</a></small><br>
+						<img id="afterJquery" src="image/beforeJquery2.png">
+					</section>
+					<section>
+						<h3>jQuery 얼마나 사용하는가?</h3>
+						<small>
+			                        <a href="http://trends.builtwith.com/javascript/jQuery">from builtwith.com</a>
+			                    </small>
+			                    <br>
+			                    <p>
+			                        <img src="image/usingJquery.png">
+			                        <img src="image/usingJqueryText.png">
+			                    </p>
+			                    <ul>
+			                    	<li  class="fragment"><span class="emphasize">70.8%</span>가 jQuery를 사용하고 있음.</li>
+			                    	<div  class="fragment">
+				                    	<li>Web Crawling을 할수 없는 다양한 환경에서도 사용되고 있음</li>
+				                    	<small>Google Chrome add-ons, Mozilla XUL apps and Firefox extensions, Firefox OS apps, Chrome OS apps, Windows 8 Store apps, BlackBerry 10 WebWorks apps, PhoneGap/Cordova apps, Node.js, and even the Sony PlayStation 4</small>
+			                    	</div>
+			                    </ul><br>
+
+			                    <blockquote class="fragment">jQuery는 <span class="semi-emphasize">암묵적인 업계 표준</span></blockquote>
+					</section>
+					<section>
+						<h2>jQuery</h2>
+						<small><a href="http://jquery.com/">http://jquery.com</a></small><br>
+						<div style="float:left;width:20%">
+							<img src="image/jeresig.jpg">
+						</div>
+						<div style="float:left;margin-left:10px">
+							<p>John Resig이 개발</p>
+							<p>2005년 DOM Selector에 대한 고민으로 부터<br> 시작하여 Core Library로 발전함.</p>
+							<small><a href="http://ejohn.org/blog/selectors-in-javascript/">August 22nd, 2005 - Selectors in JavaScript</a>
+							</small>
+							<hr>
+							<ul>
+								<li class="fragment">막강한 DOM Selector와 Method chaining 지원. <span class="fragment emphasize">코드량 감소</span></li>
+								<li class="fragment">Plugin 구조를 지원. <span class="fragment emphasize">개발자의 참여 유도</span></li>
+							</ul>
+						</div>
+						<div style="clear:both"></div>
+						<blockquote class="fragment" style="margin-top:30px">방대한 <span class="semi-emphasize">커뮤니티</span>와 다양한 <span class="semi-emphasize">레퍼런스</span>를 갖게됨</blockquote>
+					</section>
+				</section>
+				<section data-background="#8c4738">
+					<h3>Jindo 개발자가 알아야 할 jQuery</h3>
+				</section>
+				<section>
+					<section>
+						<h3>Jindo와 jQuery의 관심사, 철학은 무엇인가?</h3><br>
+					</section>
+					<section>
+						<h3><img src="image/jindo.png" style="height:70px"><span  style="line-height:70px; text-align: center"> 의 관심사</span></h3><br>
+						<p class="fragment"><span class="emphasize">크로스 브라우징</span> 문제 해결이 주요 관심사</p>
+					</section>
+					<section>
+						<p>브라우저에서 발생하는 버그나 특성을 <span class="semi-emphasize">일관성</span>있게 처리하기 위해, 브라우저 bulit-in에 해당하는 <span class="emphasize">객체를 랩핑</span>하는 구조</p>
+						<br>
+
+						<img class="fragment" src="image/jindost.png"><br><br>
+						<blockquote  class="fragment" >객체 형태와 성격에 따라서<br> $Agent, $Class, $Element와 같이 <span class="emphasize">다양한 클래스</span>가 존재</blockquote>
+					</section>
+
+					<section>
+						<h3><img src="image/jquery.png" style="height:100px"><span  style="line-height:90px; text-align: center"> 의 관심사</span></h3><br>
+
+						<blockquote  class="fragment">
+						<span class="semi-emphasize">write less</span>, do more
+						</blockquote><br>
+						<p class="fragment"><span class="emphasize">코드 간소화</span> 가 주요 관심사</p>
+					</section>
+					<section>
+						<h3>간단한 인터페이스를 가짐</h2><br>
+						<div class="fragment">
+							<p >JQuery라는 <span class="emphasize">하나의 객체</span>를 가지고 있고,<br>jQuery에서 쓰는 모든 메서드는 <span class="emphasize">jQuery를 반환</span></p>
+							<small style="color:#777">namespace로 활용되는 유틸형태의 jQuery 메서드는 브라우저 객체 반환값을 가짐</small>
+						</div>
+						<br>
+						<p class="fragment">모든 작업에 대해 <span class="semi-emphasize">Method chaining </span>이 가능함</p>
+					</section>
+					<section>
+						<h3>jQuery 개발 패턴</h3><br>
+						<div>
+							<pre id="jquery1_after" class="fragment" style="display:inline"><code  style="display:inline;font-size:35px" data-trim>$(".boxes")</code></pre>
+							<pre   id="jquery2_after" class="fragment" style="display:inline"><code  style="display:inline;font-size:35px" data-trim>.methodA()</code></pre>
+							<pre   id="jquery3_after" class="fragment" style="display:inline"><code  style="display:inline;font-size:35px" data-trim>.methodB()</code></pre>
+							<pre   id="jquery4_after" class="fragment" style="display:inline"><code  style="display:inline;font-size:35px" data-trim>.methodC()</code></pre>
+						</div>
+						<br>
+						<ul>
+							<li id="jquery1" style="visibility: hidden">CSS Selector 문법을 이용하여 <span class="semi-emphasize">대상 DOM을 query</span> 한다</li>
+							<li id="jquery2" style="visibility: hidden">추출된 대상 DOM에 <span class="semi-emphasize">기능(MethodA)을 적용</span>한다</li>
+							<li id="jquery3" style="visibility: hidden">MethodA가 적용된 대상 DOM에 <span class="semi-emphasize">기능(MethodB)을 적용</span>한다</li>
+							<li id="jquery4" style="visibility: hidden">MethodB가 적용된 대상 DOM에 <span class="semi-emphasize">기능(MethodC)을 적용</span>한다<br>...</li>
+						</ul>
+						<br><br>
+						<blockquote class="fragment">개발이 쉽고, 코드량이 간소화됨</blockquote>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Jindo 개발자가 jQuery 사용시 주의할 사항</h3>
+					</section>
+					<section>
+						<h3>예외처리</h3>
+						<small><a href="#">Jindo</a></small>
+						<div  class="fragment">
+							<p>메서드에 잘못된 타입을 넣었을 때</p>
+	<pre><code data-trim>jindo.$Class({}).extend(null); // undefined
+	</code></pre>
+						</div>
+						<img class="fragment" src="image/typecheck.png"><br><br>
+						<div  class="fragment">
+							<p>대상이 없을 경우 </p>
+	<pre><code data-trim>jindo.$Element("#nothing"); // null
+	</code></pre>
+						</div>
+						<blockquote  style="margin-top:30px" class="fragment" >에러 여부를 명확히 알려주어, <span class="emphasize">사전에 에러를 검출</span>할 수 있음</blockquote>
+					</section>
+					<section>
+						<h3>예외처리</h3>
+						<small><a href="#">jQuery</a></small>
+						<div  class="fragment" style="margin-top:30px">
+							<p>메서드에 잘못된 타입을 넣었을 때</p>
+	<pre><code data-trim>$(".boxes").method(null); // ignore
+	</code></pre>
+						</div><br>
+						<div  class="fragment">
+							<p>대상이 없을 경우 </p>
+	<pre><code data-trim>$("#nothing"); // instance of jQuery
+	</code></pre>
+						</div><br>
+						<blockquote  class="fragment" >에러 여부를 무시하여 <span class="emphasize">치명적인 서비스 오류 방지</span></blockquote>
+					</section>
+					<section>
+						<h2>Coverage</h2>
+						<p>jQuery는 버전별로 지원하는 범위가 다르다</p>
+						<img style="margin-top:30px" src="image/coverage.png"><br><br>
+						<ul class="fragment" >
+							<li>jQuery <span class="semi-emphasize">1.x는 IE6+</span> 을 지원</li>
+							<li>jQuery <span class="semi-emphasize">2.x는 IE9+</span> 을 지원</li>
+							<div class='fragment'>
+								<li>지원범위 밖에서 발생하는 문제에 대해서는 <span class="emphasize">추가적인 버그 패치가 없다</span></li>
+								<small>e.g. iOS4, android 2.1, 2.2, 3.0, Chrome 구버전, ...</small>
+							</div>
+						</ul>
+						<!-- <blockquote  class="fragment" style="margin-top:30px">IE를 지원하지 않는 <span class="emphasize">모바일 환경에서는 2.x</span>를 권장</blockquote> -->
+					</section>
+				</section>
+				<section>
+					<h3>Jindo와 jQuery의 기능이나 성능의 차이?</h3>
+					<small><a href="http://helloworld.naver.com/helloworld/43939">NHN의 안과 밖: Jindo와 jQuery</a></small>
+					<!-- <br><br> -->
+					<!-- <p class="fragment">Jindo와 jQuery의 GAP은 저희가 메꾸겠습니다</p> -->
+				</section>
+				<!-- <section data-background="image/start.jpg">
+					<h2 style="float:left">Roadmap</h2>
+					<div style="clear:both;"></div>
+					<br><br><br><br><br>
+					<div style=" float:left"  >
+						<p class="fragment"  style="text-align: left;"><span class="semi-emphasize">오픈소스를 최대한 활용</span>한 유연한 기술지원</p>
+						<p class="fragment"  style="text-align: left;">Jindo의 경쟁력있는 제품군은 <span class="emphasize">jQuery 생태계에 기여</span></p>
+						<p class="fragment"  style="text-align: left;"><span class="semi-emphasize">네이버 개발자의 참여 유도</span><br><span style="font-size:30px">"AJAXUI_여기에물어보세요" <a href="mailto:dl_auHelp@navercorp.com">dl_auHelp@navercorp.com</a></span></p>
+					</div>
+				</section> -->
+				<section  data-background="image/sunshine.jpg">
+					<h2 style="text-shadow: 2px 2px #000">감사합니다.</h2>
+					<br>
+					<h3 style="text-shadow: 2px 2px #000">BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+				try {
+					var id = event.fragment.getAttribute("id");
+					var el = document.getElementById(id.substring(0, id.indexOf("_after")));
+					// console.log("shown",id,el);
+					switch(id) {
+						case "beforeJquery_after" :
+							el.src= "image/beforeJquery2.png";
+							break;
+						case "fixproblem_after" :
+							el.style.textDecoration = "line-through";
+							break;
+						case "afterJquery_after" :
+							el.src= "image/afterjQuery.png";
+							break;
+						case "jquery1_after" :
+						case "jquery2_after" :
+						case "jquery3_after" :
+						case "jquery4_after" :
+							el.style.visibility = "";
+							break;
+					}
+				} catch(e) {
+					// console.log(e);
+				}
+			} );
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+				try{
+					var id = event.fragment.getAttribute("id");
+					var el = document.getElementById(id.substring(0, id.indexOf("_after")));
+					// console.log("hidden",el);
+					switch(id) {
+						case "beforeJquery_after" :
+							el.src= "image/beforeJquery1.png";
+							break;
+						case "afterJquery_after" :
+							el.src= "image/beforeJquery2.png";
+							break;
+						case "fixproblem_after" :
+							el.style.textDecoration = "";
+							break;
+						case "jquery1_after" :
+						case "jquery2_after" :
+						case "jquery3_after" :
+						case "jquery4_after" :
+							el.style.visibility = "hidden";
+							break;
+					}
+				} catch(e) {
+					// console.log(e);
+				}
+			} );
+
+		</script>
+
+	</body>
+</html>

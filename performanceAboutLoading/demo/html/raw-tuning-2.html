@@ -1,0 +1,103 @@
+<html lang="en" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Performance Example</title>
+  <!-- SCRIPT -->
+  <script type="text/javascript" src="../dist/js/perf-example_2.min.js"></script>
+  <!-- SCRIPT -->
+  </head>
+<body>
+<article class="markdown-body entry-content">
+  <h1><a id="user-content-front-end-성능의-기본-이해" class="anchor" href="#front-end-성능의-기본-이해" aria-hidden="true">
+  <span class="octicon octicon-link"></span></a>Front-End 성능 개선</h1>
+  <br/><hr/>
+  <h3><a id="user-content-요청수를-줄여라" class="anchor" href="#요청수를-줄여라" aria-hidden="true"><span class="octicon octicon-link"></span></a>요청수를 줄여라</h3>
+  <hr/>
+  <h4>HTTP Request 수를 줄이자</h4>
+  <ul>
+    <li>Merge</li>
+    <li>Remove</li>
+    <li>Caching</li>
+    <li>Lazy Loading</li>
+  </ul>
+  <!-- 버튼 이미지 -->
+  <button class="btn1">버튼1</button>
+  <button class="btn2">버튼2</button>
+  <button class="btn3">버튼3</button>
+  <button class="btn4">버튼4</button>
+  <div class="sprite">
+  <div class="icon-apple"></div>
+  <div class="icon-battery"></div>
+  <div class="icon-bluetooth"></div>
+  <div class="icon-cloud"></div>
+  <div class="icon-cross"></div>
+  <div class="icon-globe"></div>
+  <div class="icon-HD"></div>
+  <div class="icon-heart"></div>
+  <div class="icon-info"></div>
+  <div class="icon-light-bulb"></div>
+  <div class="icon-marker"></div>
+  <div class="icon-padlock"></div>
+  <div class="icon-phone"></div>
+  <div class="icon-pie-chart"></div>
+  <div class="icon-quicktime"></div>
+  <div class="icon-recycle"></div>
+  <div class="icon-rss"></div>
+  <div class="icon-SD"></div>
+  <div class="icon-search"></div>
+  <div class="icon-sound"></div>
+  <div class="icon-speech_bubble"></div>
+  <div class="icon-star"></div>
+  <div class="icon-stats"></div>
+  <div class="icon-tag"></div>
+  <div class="icon-thumbs-down"></div>
+  <div class="icon-thumbs-up"></div>
+  <div class="icon-tick"></div>
+  <div class="icon-user"></div>
+  <div class="icon-wifi"></div>
+  <div class="icon-windows"></div>
+  </div>
+  <!-- 버튼 이미지 -->
+  <pre style="clear: both"><code>튜닝1 : tuning-1.html</code></pre>
+  <br/><hr/>
+  <h3><a id="user-content-요청-크기를-줄여라" class="anchor" href="#요청-크기를-줄여라" aria-hidden="true"><span class="octicon octicon-link"></span></a>요청 크기를 줄여라</h3>
+  <!-- CSS, SCRIPT -->
+  <link rel="stylesheet" type="text/css" href="../dist/css/perf-example.min.css">
+  <script type="text/javascript" src="../dist/js/perf-example_1.min.js"></script>
+  <!-- dev script -->
+  <script type="text/javascript" src="../dist/js/perf-example_3.min.js"></script>
+  <!-- dev script -->
+  <!-- CSS, SCRIPT -->
+  <hr/>
+  <h4>HTTP Request 수를 줄이자</h4>
+  <ul>
+    <li>minify, obfuscation</li>
+    <li>image format / size / metadata</li>
+    <li>기타</li>
+  </ul>
+  <pre><code>튜닝2 : tuning-2.html</code></pre>
+  <img src="../dist/images/256/xrQHn-1x.jpg"
+          srcset="../dist/images/256/xrQHn-2x.jpg 2x" width="256px"/>
+  <img src="../dist/images/256/b3fBJ-1x.jpg"
+          srcset="../dist/images/256/b3fBJ-2x.jpg 2x" width="256px"/>
+  <img src="../dist/images/256/xmSh2-1x.jpg"
+          srcset="../dist/images/256/xmSh2-2x.jpg 2x" width="256px"/>
+  <img src="../dist/images/256/iIpJm-1x.jpg"
+          srcset="../dist/images/256/iIpJm-2x.jpg 2x" width="256px"/>
+  <img src="../dist/images/99/YbYCPFF-1x.png"
+          srcset="../dist/images/99/YbYCPFF-2x.png 2x" width="99px" />
+  <img src="../dist/images/112/6UdOxeB-1x.png"
+          srcset="../dist/images/112/6UdOxeB-2x.png 2x"width="112px"/>
+  <img src="../dist/images/140/qd8G15D-1x.png"
+          srcset="../dist/images/140/qd8G15D-2x.png 2x" width="140px" />
+  <br/><hr/>
+  <h3><a id="user-content-랜더링-빠르게-하기" class="anchor" href="#랜더링-빠르게-하기" aria-hidden="true"><span class="octicon octicon-link"></span></a>페이지 빠르게 랜더링 하기</h3>
+  <hr/>
+  <ul>
+    <li>자원의 위치에 따른 랜더링 특징</li>
+    <li>외부 스크립트 로딩 제어</li>
+  </ul>
+  <pre><code>튜닝3 : tuning-3.html</code></pre>
+</article>
+</body>
+</html>

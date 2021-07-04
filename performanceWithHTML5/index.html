@@ -1,0 +1,651 @@
+`<!doctype html>
+<html lang="ko">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>HTML5를 활용한 Front-End 성능 개선</title>
+
+		<meta name="description" content="performanceWithHTML5">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.code > button:hover {
+	opacity: 1;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+
+blockquote {
+	width : 90% !important;
+	border-radius: 5px;
+}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/performance.jpg" data-transition="zoom" data-background-transition="zoom">
+					<h1><span class="strong">HTML5</span>를 활용한<h1>
+					<h2>Front-End 성능 개선</h2>
+					<br>
+					<p>
+						<small>Created by <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<section>
+						<h2>성능 이란 무엇인가?</h2>
+						<p><span class="strong">RAIL</span> performance model</p>
+						<img src="image/rail.png"/>
+						<small>developers.google.com <a href="http://goo.gl/axNG6r">http://goo.gl/axNG6r</a></small>
+					</section>
+					<section>
+						<h3>오늘은</h3>
+						<h2><span class="strong">Loading</span></h2>
+						<h3>에 대해서만 이야기합니다</h3>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>로딩 과정의 이해</h3>
+						<img src="image/loading.jpg" style="width:90%"/>
+					</section>
+					<section>
+						<h3>Connect / Request / Response</h3>
+						<p>자원 요청에 대한 과정</p>
+						<img src="image/request_response.png">
+						<p>Stalled == Browser waiting</p>
+						<p>TTFB == Server Time</p>
+					</section>
+					<section>
+						<h3>Waterfall Chart</h3>
+						<img src="image/waterfallchart.png" style="width:95%">
+					</section>
+				</section>
+				<section>
+					<h2>Front End 성능 개선이란?</h2>
+				</section>
+				<section>
+					<div>
+						<h3 class="strong">Waterfall chart를 어떻게 개선할 것인가?</h3>
+						<img src="image/waterfallchart.png">
+					</div>
+				</section>
+				<section data-background="#403200">
+					<h2>우리가 개선할 페이지는?</h2><br>
+					<p><span class="strong">30</span> Request, <span class="strong">2.0MB</span> transfered</p>
+					<a href="#/5">[raw]</a>&nbsp;<a href="#/13">[tuning1]</a>&nbsp;<a href="#/19">[tuning2]</a>&nbsp;<a href="#/23">[tuning3]</a>&nbsp;<a href="#/24">[localStorage]</a>
+				</section>
+				<section data-background="#8c4738">
+					<h2>요청 수 최소화 하기</h2>
+				</section>
+				<section>
+					<section>
+						<h3>Waterfall chart의 <span class="strong">높이</span> 줄이기</h3>
+						<img src="image/wf-height.png"/>
+					</section>
+					<section>
+						<h2>HTTP Request <span class="strong">수</span>를 줄이자</h2>
+					</section>
+					<section>
+						<h2>왜?</h2>
+						<h3><span class="semi-strong">HTTP Request 수</span>가 많으면 느린가?</h3>
+					</section>
+					<section>
+						<h3>NETWORK COST</h3>
+						<p>DNS Lookup, Connection, Server time, Download, ...</p>
+						<img src="image/networkcost.png">
+						<p>3G 접속일 경우, 특히 connection에 대한 비용이 많이 발생함</p>
+					</section>
+					<section>
+						<h3>HTTP 구성에 따른 전송량의 증가</h3>
+						<p>HTTP Header, Cookie</p>
+						<div style="float:left; width:60%">
+							<img src="image/httpheader1.png">
+						</div>
+						<div style="float:left; width:40%">
+							<img src="image/httpheader2.png">
+						</div>
+					</section>
+					<section>
+						<p>DOMAIN 당 연결할 수 있는</p>
+						<h3>CONNECTION 수가 정해져 있음</h3>
+						<div style="float:left; width:60%">
+							<img src="image/domainsharding.png">
+						</div>
+						<div style="float:left; width:40%">
+							<img src="image/domainhost.png">
+							<p><small>Browserscope : <a href="http://goo.gl/ZhFwaF">http://goo.gl/ZhFwaF</a></small></p>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h2>HOW TO?</h2>
+					<ul>
+						<li>자원의 Merge</li>
+						<li>불필요한 자원의 제거</li>
+						<li>자원의 재사용 (Cache)</li>
+						<li>초기 로딩 속도에 필요 없는 자원 나중에 로딩</li>
+						<li>...</li>
+					</ul>
+				</section>
+				<section>
+					<h2>JS, CSS의 Merge</h2>
+					<p>Grunt, gulp와 같은 자동화 툴을 이용한 자동 merge</p>
+				</section>
+				<section>
+					<section>
+						<h3>IMAGE의 Merge (CSS Sprite)</h3>
+						<img src="image/csssprite1.png">
+					</section>
+					<section>
+						<h3>IMAGE의 Merge (CSS Sprite)</h3>
+						<img src="image/csssprite2.png">
+						<p><span class="strong">background-image/position</span>을 이용한 CSS Sprite</p>
+						<pre><code>
+#nav li a { background-image:url("image_nav.gif"); }
+#nav li a.item1 { background-position: 0px 0px; }
+#nav li a.item2 { background-position: -72px 0px; }
+#nav li a.item3 { background-position: -144px 0px; }
+	</code></pre>
+					</section>
+				</section>
+				<section>
+					<section  data-background="#1A3819">
+						<h2>HTML5를 이용한 요청수 줄이기</h2>
+					</section>
+					<section>
+						<h3>IMAGE 제거 (CSS3 Effect)</h3>
+						<img src="image/csseffect.png">
+						<p><span class="strong">6KBytes</span> 이미지</p>
+					</section>
+					<section>
+						<h3>IMAGE 제거 (CSS3 Effect)</h3>
+<div id="iconDemo">
+  <a class="docIcon"></a>
+</div>
+<pre><code class="liveCoding css" data-livecoding-id="iconDemo" contenteditable>.docIcon {
+        background:#eee;
+        display:block;
+        width:80px;
+        height:112px;
+        position:relative;
+        margin:42px auto;
+        border:1px solid #ccc;
+/*
+        background:-webkit-linear-gradient(top, #ddd 0, #eee 15%, #fff 40%, #fff 70%, #eee 100%);
+        box-shadow:inset rgba(255,255,255,0.8) 0 1px 1px;
+        border-radius:3px 15px 3px 3px;
+*/
+}
+.docIcon:before {
+/*
+        content:"";
+        display:block;
+        position:absolute;
+        top:0;
+        right:0;
+        width:30px;
+        height:30px;
+        background:#ccc;
+*/
+/*
+        background:-webkit-linear-gradient(45deg, #fff 0,  #eee 50%, #ccc 100%);
+        box-shadow:rgba(0,0,0,0.05) -1px 1px 1px, inset white 0 0 1px;
+        border-bottom:1px solid #ccc;
+        border-left:1px solid #ccc;
+*/
+/*
+        border-radius:0 14px 0 0;
+*/
+}
+
+.docIcon:after {
+/*
+        content:"";
+        display:block;
+        position:absolute;
+        left:0;
+        top:0;
+        width:60%;
+        height:36px;
+        background:#ccc;
+*/
+/*
+        background:-webkit-linear-gradient(top, #ccc 0, #ccc 20%, #fff 20%, #fff 40%, #ccc 40%, #ccc 60%, #fff 60%, #fff 80%, #ccc 80%, #ccc 100%);
+*/
+/*
+        margin:40px 20% 0;
+*/
+}
+</code></pre>
+					</section>
+					<section>
+						<h3>IMAGE 제거 (CSS3 Effect)</h3>
+						<h4><span class="strong">6배</span>의 용량 감소</h4>
+						<img src="image/csseffect.png">
+						<p><span class="strong">1KBytes</span> CSS3 Effect</p>
+					</section>
+					<section>
+						<h3>CSS BUTTON</h3>
+						<iframe width="90%" height="500px" src="http://www.bestcssbuttongenerator.com/"></iframe>
+						<br><small><a href="http://www.bestcssbuttongenerator.com/">http://www.bestcssbuttongenerator.com</a></small>
+					</section>
+					<section>
+						<h3>CSS ICON</h3>
+						<iframe width="90%" height="500px" src="http://tympanus.net/Development/IconHoverEffects//"></iframe>
+						<br><small><a href="http://tympanus.net/Development/IconHoverEffects/">http://tympanus.net/Development/IconHoverEffects/</a></small>
+					</section>
+					<section>
+						<h3>Loading</h3>
+						<iframe width="90%" height="500px" style="background:#fff" src="http://codepen.io/hsucherng/full/bdEmA"></iframe>
+						<br><small><a href="http://codepen.io/hsucherng/full/bdEmA">http://codepen.io/hsucherng/full/bdEmA</a></small>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>LocalStorage 이용한 성능 개선</h3>
+						<p>클라이언트의 Database를 이용하여 Request수를 줄인다.</p><br>
+						<h3 class="fragment"><span class="strong">브라우저 캐쉬</span>를 이용하면 안되는가?</h3>
+					</section>
+					<section>
+						<h3>브라우저 캐시는 제한이 있다.</h3>
+						<p>limit를 초과한 경우, 기존 캐싱 자원이 삭제됨</p>
+						<img src="image/cachelimit.png"/><br>
+						<small>www.guypo.com : <a href="goo.gl/tl7bJm">goo.gl/tl7bJm</a></small>
+					</section>
+					<section>
+						<h3>LocalStorage는 빠르다</h3>
+						<p>Smartphone Browser localStorage is<br>
+						up to <span class="strong">5x</span> Faster than Native Cache</p>
+						<img src="image/localstorage.png"/><br>
+						<small>www.mobify.com : <a href="http://goo.gl/xqJPR2">http://goo.gl/xqJPR2</a></small>
+					</section>
+					<section>
+						<h3>window.localStorage</h3>
+						<pre><code>// setItem, getItem
+localStorage.setItem("성능", "느림");
+localStorage.getItem("성능"); // "느림"
+
+// like object
+localStorage["개선"] = "HTML5";
+localStorage["개선"]; // "HTML5"
+</code></pre>
+						<ul>
+							<li>도메인 별로 <span class="strong">영구적</span>으로 저장된다</li>
+							<li>key/value 쌍으로 저장한다</li>
+							<li>key/value 모두 <span class="strong">string</span>으로 저장된다</li>
+						</ul>
+					</section>
+					<section>
+						<h3>JS,CSS의 LocalStorage를 이용한 캐싱</h3>
+						<p><span class="semi-strong">자주 변경이 되지 않는 파일</span>에 대해서는 localStorage를 이용해 확실하게 캐싱되도록 처리</p>
+					</section>
+					<section>
+						<h3>LocalStorage를 이용하는 Flow</h3>
+						<img src="image/localStorageflow.png"/>
+					</section>
+					<section>
+						<h3>LocalStorage를 캐싱을 지원하는 오픈소스</h3>
+						<img src="image/basketlog.png" style="background-color: #fff"/><br>
+						<small><a href="http://addyosmani.github.io/basket.js/">http://addyosmani.github.io/basket.js/</a></small>
+					</section>
+					<section>
+						<h3>LocalStorage 적용</h3>
+						<p>LocalStorage에 Javascript가 저장된것을 확인 할수 있다</p>
+						<img src="image/localstorageex.png"/>
+						<br>
+						<h4>실제 예제는 마지막 장에서...</h4>
+					</section>
+				</section>
+				<section data-background="#403200">
+					<h2>얼마나 개선되었나?</h2><br>
+					<p><span class="strong">11</span> Request, <span class="strong">under 2.0MB</span> transfered</p>
+					<a href="#/5">[raw]</a>&nbsp;<a href="#/13">[tuning1]</a>&nbsp;<a href="#/19">[tuning2]</a>&nbsp;<a href="#/23">[tuning3]</a>
+				</section>
+				<section data-background="#8c4738">
+					<h2>요청 크기 최소화 하기</h2>
+				</section>
+				<section>
+					<section>
+						<h3>Waterfall chart의 <span class="strong">폭</span> 줄이기</h3>
+						<img src="image/wf-width.png"/>
+					</section>
+					<section>
+						<h2>HTTP Request <span class="strong">양</span>을 줄이자</h2>
+					</section>
+					<section>
+						<h2>HOW TO?</h2>
+						<ul>
+							<li>자원의 크기를 최소화</li>
+							<li>HTTP Request Header 줄이기</li>
+							<li>Gzip compress</li>
+							<li>...</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Minify와 Obfuscation</h3>
+	<pre><code>
+function isHWAccelerable() {
+	var result = false;
+	var agent = this.agent();
+	var osVersion = agent.os.version;
+	var browser = agent.browser.name;
+	var browserVersion = agent.browser.version;
+	var useragent;
+
+	// chrome (less then 25) has a text blur bug.
+	// but samsung sbrowser fix it.
+	if (browser.indexOf("chrome") !== -1) {
+		result = browserVersion >= "25";
+	} else if (/ie|firefox|safari|inapp/.test(browser)) {
+		result = true;
+	} else if (agent.os.name.indexOf("android") !== -1) {
+		useragent = (ua.match(/\(.*\)/) || [null])[0];
+
+		// android 4.1+ blacklist
+		// EK-GN120 : Galaxy Camera, SM-G386F : Galaxy Core LTE
+		// SHW-M420 : Galaxy Nexus , SHW-M200 : NexusS , GT-S7562 : Galaxy S duos
+		result = (osVersion >= "4.1.0" && !/EK-GN120|SM-G386F/.test(useragent)) ||
+			(osVersion >= "4.0.3" &&
+				/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(useragent) && !/SHW-M420|SHW-M200|GT-S7562/.test(useragent));
+	}
+	return resultCache(this, "isHWAccelerable", [result, agent], result);
+}
+	</code></pre>
+<p>1,000 Bytes</p>
+					</section>
+					<section>
+						<h3>Minify와 Obfuscation</h3>
+						<div>
+						<p>주석제거, 공백 제거 (687 Bytes)</p>
+	<pre><code>
+function isHWAccelerable(){var result=false;var agent=this.agent();var osVersion=agent.os.version;var browser=agent.browser.name;var browserVersion=agent.browser.version;var useragent;if(browser.indexOf("chrome")!==-1){result=browserVersion>="25";}else if(/ie|firefox|safari|inapp/.test(browser)){result=true;}else if(agent.os.name.indexOf("android")!==-1){useragent=(ua.match(/\(.*\)/)||[null])[0];result=(osVersion>="4.1.0"&&!/EK-GN120|SM-G386F/.test(useragent))||(osVersion>="4.0.3"&&/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(useragent)&&!/SHW-M420|SHW-M200|GT-S7562/.test(useragent));}
+return resultCache(this,"isHWAccelerable",[result,agent],result);}
+	</code></pre>
+</div>
+
+<div class="fragment">
+<p>변수명 난독화 (491 Bytes)</p>
+	<pre><code>
+function isHWAccelerable(){var e,r=!1,s=this.agent(),t=s.os.version,i=s.browser.name,a=s.browser.version;return-1!==i.indexOf("chrome")?r=a>="25":/ie|firefox|safari|inapp/.test(i)?r=!0:-1!==s.os.name.indexOf("android")&&(e=(ua.match(/\(.*\)/)||[null])[0],r=t>="4.1.0"&&!/EK-GN120|SM-G386F/.test(e)||t>="4.0.3"&&/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(e)&&!/SHW-M420|SHW-M200|GT-S7562/.test(e)),resultCache(this,"isHWAccelerable",[r,s],r)}
+	</code></pre>
+	</div><br>
+	<h3 class="fragment"><span class="strong">50.9%</span> 감소</h3>
+					</section>
+					<section>
+						<h3>Minify와 Obfuscation</h3><br>
+						<p>Grunt, gulp와 같은 자동화 툴을 이용한 </p>
+						<p>HTML, CSS minified와 JS minified,obfuscation</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>이미지 크기 줄이기</h3>
+						<p>이미지의 크기를 결정하는 요인</p>
+						<ul>
+							<li>이미지의 포맷</li>
+							<li>이미지의 사이즈</li>
+						</ul>
+					</section>
+					<section>
+						<h3>이미지 포맷</h3>
+						<p>이미지의 크기를 결정하는 요인</p>
+						<img src="image/imageformat.png">
+						<small>svgopen.org : <a href="http://goo.gl/cwTZ6h">http://goo.gl/cwTZ6h</a></small><br>
+						<div class="fragment">
+							<ul >
+								<li>PNG : png-8, png-24에 따라 용량 차이가 남.</li>
+								<li>JPEG : 압축률 70~90%에 따라, 용량이 작아짐</li>
+							</ul><br>
+							<small>* 용량이 작은 <span class="strong">WebP</span> 포맷은 Chrome, Android 4.1+ 만 지원</small>
+						</div>
+					</section>
+					<section>
+						<h3>이미지 포맷 기준</h3>
+						<img src="image/format-tree.png"><br>
+						<small>developers.google.com : <a href="http://goo.gl/IeQuI3">http://goo.gl/IeQuI3</a></small><br>
+					</section>
+					<section>
+						<h3>이미지 사이즈</h3>
+						<p>사이즈가 크면 클수록 용량은 배로 증가</p>
+						<blockquote>Pixel 수(width * height) * 표현할 수 있는 컬러 수</blockquote>
+						<img src="image/imagesize.png" style="width:50%">
+						<img src="image/imagesize.png" style="width:25%">
+					</section>
+					<section>
+						<p>고해상도 (레티나) 대응을 위해,</p>
+						<h3>실제 표현하는 사이즈 보다</h3>
+						<h3> <span class="strong">2배 이상</span>으로 사이즈 조정</h3>
+					</section>
+				</section>
+				<section>
+					<section  data-background="#1A3819">
+						<h2>HTML5를 이용한 반응형 이미지 </h2>
+					</section>
+					<section>
+						<h3>srcset을 이용</h3><pre><code>
+	&lt;img srcset="retina-image.jpg 2x" src="image.jpg" alt="an image" /&gt;
+	</code></pre>
+<p>화면의 <span class="strong">pixel ratio</span>에 맞는 이미지를 사용</p>
+					</section>
+					<section>
+						<h3>picture를 이용</h3><pre><code>
+&lt;picture&gt;
+    &lt;source media="orientation:landscape"
+    	srcset="retina-horizontal-image.jpg 2x, horizontal-image.jpg" /&gt;
+    &lt;source media="orientation:portrait"
+    	srcset="retina-vertical-image.jpg 2x, vertical-image.jpg" /&gt;
+    &lt;img src="image.jpg" alt="an image" /&gt;
+&lt;/picture&gt;
+	</code></pre>
+<p>화면의 <span class="strong">회전상태</span>에 따라</p>
+<p>화면의 pixel ratio에 맞는 이미지를 사용</p>
+					</section>
+				</section>
+				<section data-background="#403200">
+					<h2>얼마나 개선되었나?</h2><br>
+					<p><span class="strong">11</span> Request, <span class="strong">546 KB / 870 KB</span> transfered</p>
+					<a href="#/5">[raw]</a>&nbsp;<a href="#/13">[tuning1]</a>&nbsp;<a href="#/19">[tuning2]</a>&nbsp;<a href="#/23">[tuning3]</a>
+				</section>
+				<section data-background="#8c4738">
+					<h2>랜더링 빠르게 하기</h2>
+				</section>
+				<section>
+					<section>
+						<h3>Waterfall chart의 <span class="strong">간격</span> 줄이기</h3>
+						<img src="image/wf-rendering.png"/>
+					</section>
+					<section>
+						<h3>브라우저 랜더링 과정</h3>
+						<img src="image/rendering.png" style="width:90%">
+						<p>TTFB (Time To First Bytes) 이후, <span class="strong">병렬로 랜더링</span>을 한다.</p>
+					</section>
+					<section>
+						<h3>자원의 위치에 따른 랜더링</h3>
+						<div style="float:left;width:40%">
+							<img src="image/scriptposition.png">
+						</div>
+						<div style="float:left;width:60%">
+						<br>
+							<ul style="width:90%">
+								<li>A : head 안의 모든 자원 로딩 후 Body 파싱</li>
+								<p class="fragment semi-strong">First Paint Time을 결정 <a href="#/21/4">[링크]</a></p>
+								<li class="fragment">B : <span class="strong">병렬 랜러딩 불가</span> <a href="#/21/5">[링크]</a></li><br>
+								<li class="fragment">C : Body 랜러링이 완료된 이후</li>
+							</ul>
+						</div>
+					</section>
+					<section>
+						<h3>적절한 자원의 위치 선정</h3>
+						<ul>
+							<li>시각적으로 빠른 화면을 제공하기 위해, <span class="semi-strong">head에는</span> 꼭 레이아웃 구성에 꼭 필요한 <span class="semi-strong">CSS 파일</span>만 넣는다.</li>
+							<li>BODY 태그 안에서는 CSS나 Script를 넣지 않는다. <span class="strong">전체 랜더링이 잠시 중단</span>된다</li>
+							<li>Script는 <span class="semi-strong">body 태그 닫기 전</span>에 넣는다.</li>
+						</ul>
+					</section>
+					<section>
+						<h3>First Paint Time</h3>
+						<p>초기 화면에 무엇인가 되도록 빠른 시점에 출력되도록 하면 체감적인 속도향상을 느끼게 할 수 있다.</p>
+						<img src="image/film.png" style="width:90%"/>
+						<p><a href="#/21/2">[링크]</a></p>
+					</section>
+					<section>
+						<p>스크립트는 다양한 작업을 수행하는 코드로 이루어져 있고, DOM을 변경하는 작업들이 포함되어 있을 수 있기 때문에, 블록 된다.</p><pre><code>
+	document.write("paused HTML parsing");
+	</code></pre>
+						<img src="image/script.png" style="width:90%"/>
+						<p><a href="#/21/2">[링크]</a></p>
+					</section>
+				</section>
+				<section>
+					<section  data-background="#1A3819">
+						<h2>HTML5를 이용한 스크립트 로딩 </h2>
+					</section>
+					<section>
+						<h3>defer를 이용</h3>
+<p>HTML 파싱이 완료된 이후에, 스크립트를 실행</p>
+						<pre><code>
+	&lt;script defer src="js.js"&gt;&lt;/script&gt;
+	&lt;script defer&gt; // script codes &lt;/script&gt;
+	</code></pre>
+<img src="image/scriptdefer.png" style="width:90%"/>
+					</section>
+					<section>
+						<h3>async를 이용</h3>
+<p>스크립트를 실행할 때만, HTML 파싱이 중단</p>
+						<pre><code>
+	&lt;script async src="js.js"&gt;&lt;/script&gt;
+	&lt;script async="false" src="js.js"&gt;&lt;/script&gt;
+	&lt;script async&gt; // script codes &lt;/script&gt;
+	</code></pre>
+<img src="image/scriptasync.png" style="width:90%"/>
+<p><span class="strong">async=false</span>일 경우, 순서 보장 (기본값은 true)</p>
+					</section>
+					<section>
+						<h3>defer와 async의 적절한 사용</h3>
+<img src="image/scriptsum.jpg" style="width:90%"/><br><br>
+<p>DOM 제어와 관련이 있는 스크립트는 <span class="strong">defer</span>를 사용</p>
+<p>DOM 제어와 관련이 없고, 가능한 의존성이 없는 스크립트는 <span class="strong">async</span>를 사용</p>
+					</section>
+				</section>
+				<section data-background="#403200">
+					<h2>얼마나 개선되었나?</h2><br>
+					<p><span class="strong">11</span> Request, <span class="strong">546 KB / 870 KB</span> transfered</p>
+					<p>But, <span class="strong">improved rendering</span></p>
+					<a href="#/5">[raw]</a>&nbsp;<a href="#/13">[tuning1]</a>&nbsp;<a href="#/19">[tuning2]</a>&nbsp;<a href="#/23">[tuning3]</a>
+				</section>
+				<section data-background="#403200">
+					<p>LocalStorage를 사용하면</p>
+					<h2>얼마나 개선되나?</h2><br>
+					<p><span class="strong">10</span> Request, <span class="strong">351 KB</span> transfered</p>
+					<a href="#/5">[raw]</a>
+				</section>
+				<section>
+					<h2>Front End 성능 개선이란?</h2>
+					<div class="fragment">
+						<h3 class="strong">== Waterfall chart를 어떻게 개선할 것인가?</h3>
+						<img src="image/wf-summary.png">
+					</div>
+				</section>
+				<section>
+					<h2>HTML5를 이용한 성능 개선</h2>
+					<div>
+						<img src="image/wf-summary-html.png">
+					</div>
+				</section>
+				<section data-background="image/dynamic_thank.jpg">
+					<h2>감사합니다.</h2>
+					<br>
+					<h3>BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					// https://github.com/iamvdo/Reveal-liveCoding
+					{ src: '../__lib__/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>

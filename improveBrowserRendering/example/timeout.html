@@ -1,0 +1,77 @@
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>박스 이동하기 - timeout</title>
+<style type="text/css">
+.box {
+    background-color: #082746;
+    height: 100px;
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 150px;
+}
+</style>
+</head>
+<body>
+<div style="margin:10px">
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+    <div class="box">
+    </div>
+</div>
+<script type="text/javascript">
+var aBox = [];
+
+var aEl = document.querySelectorAll(".box");
+for(var i =0, nLen = aEl.length; i<nLen; i++) {
+	aBox.push({
+		el : aEl[i],
+		now : 0,
+		startTime : 0
+	});
+}
+
+function start(i, nDuration) {
+	aBox[i].startTime = (new Date()).getTime();
+	aBox[i].nDuration = nDuration;
+	(function animate () {
+		aBox[i].now = (new Date()).getTime();
+		if(aBox[i].now >= aBox[i].startTime + aBox[i].nDuration) {
+			// 다시
+			aBox[i].startTime = (new Date()).getTime();
+		}
+		aBox[i].now = (aBox[i].now  - aBox[i].startTime) / aBox[i].nDuration;
+		aBox[i].el.style.left = (aBox[i].now * ((i+1)*30) ) + "px";
+		aBox[i].el.style.top = (aBox[i].now * ((i+1)*50) ) + "px";
+            // aBox[i].el.style.webkitTransform = "translate3d(" + ( (aBox[i].now * ((i+1)*30) ) + "px") + "," +  ((aBox[i].now * ((i+1)*50) ) + "px") + ",0)";
+		setTimeout(animate, 16.6);
+		// window.requestAnimationFrame(animate);
+	})();
+}
+
+for (i = 0 ; i<nLen; i++) {
+	start(i, (10000 * Math.random()) +1);
+}
+</script>
+<!-- // Sample 실행 script 코드 끝 -->
+</body>
+</html>

@@ -1,0 +1,7 @@
+// https://github.com/gruntjs/grunt-contrib-csslint#options
+{
+	"compatible-vendor-prefixes" : false,
+	"zero-units" : false,
+  	"unique-headings": false,
+  	"box-model" : false
+}

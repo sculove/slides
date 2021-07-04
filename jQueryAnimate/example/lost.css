@@ -1,0 +1,159 @@
+#ad-1 * {
+	list-style:none;
+	margin:0;
+}
+
+#ad-1 {
+	width: 100%;
+	height: 300px;
+	background-image: url(image/background.png);
+	background-position: center;
+	background-repeat: repeat;
+	overflow: hidden;
+	position: relative;
+}
+
+#ad-1 #content {
+	width: 325px;
+	float: right;
+	margin: 40px;
+	text-align: center;
+	z-index: 4;
+	position: relative;
+	overflow: visible;
+}
+#ad-1 #content h2 {
+	color: #137dd5;
+	font-size: 50px;
+	line-height: 50px;
+	text-shadow: 0px 0px 4px #fff;
+}
+#ad-1 #content h3 {
+	color: #202224;
+	font-size: 25px;
+	letter-spacing:-2px;
+	line-height: 31px;
+	text-shadow: 0px 0px 4px #fff;
+}
+#ad-1 #content form {
+	margin: 30px 0 0 6px;
+	position: relative;
+}
+#ad-1 #content #email {
+	width: 158px;
+	height: 48px;
+	float: left;
+	padding: 0 20px;
+	font-size: 16px;
+	color: #fff;
+	text-shadow: 1px 1px 0px #a2917d;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border:1px solid #a2917d;
+	outline: none;
+	box-shadow: -1px -1px 1px #fff;
+	background-color: #c7b29b;
+}
+#ad-1 #content #submit {
+	height: 50px;
+	float: left;
+	padding: 0 15px;
+	font-size: 16px;
+	font-weight:bold;
+	color: #137dd5;
+	text-shadow: 1px 1px 0px #fff;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border:1px solid #bcc0c4;
+	border-left: none;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+#ad-1 ul#water{}
+#ad-1 li#water-back {
+	width: 110%;
+	height: 84px;
+	background-image: url(image/water-back.png);
+	background-repeat: repeat-x;
+	z-index: 1;
+	position: absolute;
+	bottom: 10px;
+	left: -20px;
+}
+#ad-1 li#water-front {
+	width: 110%;
+	height: 158px;
+	background-image: url(image/water-front.png);
+	background-repeat: repeat-x;
+	z-index: 3;
+	position: absolute;
+	bottom: -70px;
+	left:-30px;
+}
+
+#ad-1 ul#boat {
+	width: 249px;
+	height: 215px;
+	z-index: 2;
+	position: absolute;
+	bottom: 25px;
+	left: 20px;
+	overflow: visible;
+}
+#ad-1 ul#boat li {
+	width: 249px;
+	height: 215px;
+	background-image: url(image/boat.png);
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	overflow: visible;
+}
+#ad-1 #question-mark {
+	width: 24px;
+	height: 50px;
+	background-image: url(image/question-mark.png);
+	position: absolute;
+	right: 34px;
+	top: -30px;
+}
+#ad-1 #clouds {
+	position: absolute;
+	top: 0px;
+	z-index: 0;
+}
+#ad-1 #cloud-group-1 {
+	width:720px;
+	position: absolute;
+	left:0px;
+}
+#ad-1 #cloud-group-2 {
+	width: 720px;
+	position: absolute;
+	left: 720px;
+}
+#ad-1 .cloud-1 {
+	width: 172px;
+	height: 121px;
+	background-image: url(image/cloud-1.png);
+	position: absolute;
+	top: 10px;
+	left: 40px;
+}
+#ad-1 .cloud-2 {
+	width: 121px;
+	height: 75px;
+	background-image: url(image/cloud-2.png);
+	position: absolute;
+	top: -25px;
+	left: 300px;
+}
+#ad-1 .cloud-3 {
+	width: 132px;
+	height: 105px;
+	background-image: url(image/cloud-3.png);
+	position: absolute;
+	top: -5px;
+	left: 530px;
+}

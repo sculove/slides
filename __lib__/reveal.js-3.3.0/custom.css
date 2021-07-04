@@ -1,0 +1,40 @@
+.red {color:red !important;}
+.green {color:green !important;}
+.grey {color: #807E7E !important;}
+.yellow {color:#e7ad52 !important;}
+.blue {color:#268bd2 !important;}
+.bigsize {
+	font-size:1.5em !important;
+}
+.underline { text-decoration: underline !important; }
+
+strong { color: #FF5E99; }
+em {
+	font-weight:bold;
+	color: #268bd2;
+}
+
+blockquote {
+	width : 90% !important;
+	border-radius: 5px;
+}
+
+.reveal li {
+	margin-bottom : 10px !important;
+}
+
+.reveal p {
+  color: #93a1a1;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  color: #eee8d5;
+  /*text-transform: uppercase;*/
+  text-transform: none !important;
+  text-shadow: none;
+}

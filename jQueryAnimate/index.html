@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery Animation</title>
+
+		<meta name="description" content="animation">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<script src="example/jquery-2.1.4.js"></script>
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.code > button:hover {
+	opacity: 1;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+
+blockquote {
+	width : 95% !important;
+	border-radius: 5px;
+}
+</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/first-back.jpg" data-transition="zoom" data-background-transition="zoom">
+					<h2>jQuery Internal</h2>
+					<h1 style="color:#DE4182">jQuery Animation</h1>
+					<br>
+					<p>
+						<small style="color:#268bd2">Created by <a href="http://sculove.pe.kr" style="color:#78bae6">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<iframe src="example/banner.html" width="100%" height="300px"></iframe>
+					<p class="fragment">애니메이션을 <span class="strong">순차적으로</span> 실행할 수 있어야 한다</p>
+					<p class="fragment">여러 대상을 <span class="strong">동시에</span> 애니메이션 할수 있어야 한다.</p>
+				</section>
+				<section>
+					<section>
+						<h2>Sequence Animation</h2>
+					</section>
+					<section>
+						<h3>동일 엘리먼트인 경우</h3>
+						<pre><code>$(".box").animate({ left : "150px" },1000)
+  .animate({ top : "150px" },1000)
+  .animate({ left : "50px" },1000)
+  .animate({ top : "0px" },1000);</code></pre>
+						<p data-height="340" data-theme-id="0" data-slug-hash="BoXYwq" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/BoXYwq/'>sequence animate</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+					<section>
+						<h3>다른 엘리먼트인 경우 (Callback 활용)</h3>
+						<pre><code>$(".box1").animate({ left : "200px" },1000, function() {
+  $(".box2").animate({ left : "50px" },1000, function() {
+    $(".box1").animate({ top : "150px" },1000, function() {
+      $(".box2").animate({ top : "0px" },1000, function() {
+        alert("완료!");
+      });
+    });
+  });
+});</code></pre>
+						<p data-height="340" data-theme-id="0" data-slug-hash="wKVypR" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/wKVypR/'>sequence animate - multi</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+					<section>
+						<h3>다른 엘리먼트인 경우 (Promise 활용)</h3>
+						<pre><code>$(".box1").animate({ left : "200px" },1000).promise().then(function() {
+  return $(".box2").animate({ left : "50px" },1000).promise();
+}).then(function() {
+  return $(".box1").animate({ top : "150px" },1000).promise();
+}).then(function() {
+  return $(".box2").animate({ top : "0px" },1000).promise();
+}).then(function() {
+  alert("완료!");
+});</code></pre>
+					</section>
+					<section>
+						<h2>Parallel Animation</h2>
+						<pre><code>var $box1 = $(".box1");
+var $box2 = $(".box2");
+$box1.animate({ left : "200px" },1000);
+$box2.animate({ top : "0px" }, 1000);
+
+$.when($box1, $box2).then(function() {
+	alert("완료");
+});</code></pre>
+						<p data-height="340" data-theme-id="0" data-slug-hash="xwvYzq" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/xwvYzq/'>Parallel animate</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+					<section>
+					<h2><span class="strong">Wow~!</span> jQuery</h2>
+					<p>jQuery.fx.animate은 어떻게 구현되어 있길래...???</p>
+					</section>
+				</section>
+				<section>
+					<section  data-background="#8c4738">
+						<h2>Let's look into jQuery.fx.animate</h2>
+					</section>
+					<section>
+						<h3>jQuery.fx.Animate Flow</h3>
+						<iframe src="https://docs.google.com/presentation/d/1k_YO1HubFINpwzMYwHW-iwyYbZe9NhzcMjx8Kgd_DPA/embed?start=false&loop=false&delayms=1000" frameborder="0" width="100%" height="500px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+					</section>
+					<section>
+						<h3>애니메이션을 <span class="strong">순차적으로</span> 실행</h3>
+						<ul class="fragment">
+							<li>deferred 객체를 생성하는 함수(doAnimation)를 <span class="semi-strong">Queue</span>에 넣음</li>
+							<li>doAnimation을 호출하여, <span class="semi-strong">deferred 객체를 생성</span></li>
+							<li><span class="semi-strong">deferred 상태</span>가 resolved되면 다음 Queue에 있는 doAnimation 호출</li>
+						</ul>
+
+						<blockquote class="fragment">Queue 구조, Deferred 객체</blockquote>
+					</section>
+					<section>
+						<h3>여러 대상을 <span class="strong">동시에</span> 애니메이션</h3>
+						<ul class="fragment">
+							<li><span class="semi-strong">jQuery instance 별로</span> queue가 존재</li>
+							<li><span class="semi-strong">하나의 타이머(jQuery.fx.tick)</span>에서 애니메이션이 호출됨</li>
+							<li>애니메이션 좌표 계산시 <span class="semi-strong">경과 시간</span>을 기준으로 좌표 계산</li>
+						</ul>
+						<blockquote class="fragment">하나의 타이머, 경과시간 기준으로 좌표 계산</blockquote>
+					</section>
+					<section>
+						<h2>jQuery.fn.animate 주의사항</h2>
+					</section>
+					<section>
+						<h3>jQuery.fn.animate이 암묵적으로 하는 작업</h3>
+						<p class="fragment"><span class="strong">width or height</span>를 변경할 경우</p>
+					</section>
+					<section>
+						<h3>애니메이션 진행 중 overflow:hidden</h3>
+
+						<p data-height="400" data-theme-id="0" data-slug-hash="RWXLOY" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/RWXLOY/'>jQuery.fn.animate overflow issue</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+					<section>
+						<h3>애니메이션 진행 전 inline -> inline-block</h3>
+						<p data-height="268" data-theme-id="0" data-slug-hash="VvoMxy" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/VvoMxy/'>jQuery.fn.animate inline issue</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+					<section>
+						<h3>우리가 jQuery를 바꿀 수는 없을까?</h3>
+					</section>
+				</section>
+				<section>
+					<section  data-background="#8c4738">
+						<h2>jQuery는 확장을 지원한다.</h2>
+					</section>
+					<section>
+						<h3>jQuery는 hook 이라는 확장을 지원한다</h3>
+						<p  class="fragment">jQuery.fn.animate은 hook 외에도 <span class="strong">많은 확장을 지원</span>한다.</p>
+					</section>
+					<section>
+						<h3>jQuery Animation 확장하기</h3>
+						<ul>
+							<li>animation option 사용하기 (API)</li>
+							<li>jQuery hook 이용하기</li>
+							<li>Animation 확장하기</li>
+						</ul>
+					</section>
+					<section>
+						<h3>jQuery.fx.Animate Flow 더 자세히 보기</h3>
+						<iframe src="https://docs.google.com/presentation/d/1iKnBGAwsEy3F2Ct1AaBwub5kHsTddamy00Bz-aVVcLk/embed?start=false&loop=false&delayms=60000" frameborder="0" width="100%" height="500px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+					</section>
+					<section>
+						<h3>jQuery Animation 확장하기</h3>
+						<ul>
+							<li>animation option 사용하기 : <span class="semi-strong">options.start/step/progress/complete/done/fail/always</span></li>
+							<li>jQuery hook 이용하기 : <span class="semi-strong">Tween.propHooks, jQuery.fx.step</span></li>
+							<li>Animation 확장하기 : <span class="semi-strong">jQuery.Animation.prefilter/tweener</span></li>
+						</ul>
+					</section>
+					<section>
+						<h3>다시... 문제로 돌아와서</h3>
+						<p>display와 overflow 속성은 애니메이션 도중 jQuery가 바꾼다는데......?</p>
+						<p>어디를 확장하면 좋을까요?</p>
+					</section>
+					<section>
+						<p>jQuery.Animation.prefilter</p>
+						<img src="image/prefilter.png" width="100%"/>
+					</section>
+					<section>
+						<pre><code>// defaultPrefilter 이후에 호출
+jQuery.Animation.prefilter( function( element, props, opts ) {
+  if(opts.overflow) {
+    $(element).css("overflow", "visible");
+  }
+});</code></pre>
+						<small>API 문서 : <a href="https://gist.github.com/gnarf/54829d408993526fe475#prefilters" target="_blank">https://gist.github.com/gnarf/54829d408993526fe475#prefilters</a></small>
+					</section>
+					<section>
+						<p data-height="400" data-theme-id="0" data-slug-hash="EVqozx" data-default-tab="result" data-user="sculove" class='codepen'>See the Pen <a href='http://codepen.io/sculove/pen/EVqozx/'>jQuery.fn.animate overflow issue - solved</a> by son chan uk (<a href='http://codepen.io/sculove'>@sculove</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+	<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+					</section>
+				</section>
+				<section>
+					<h2>정리</h2>
+					<p>jQuery.fx.animate Flow</p>
+					<img src="image/summary.png" width="100%"/>
+					<p class="fragment">jQuery Animation 은 다양한 시점에서 <span class="strong">확장이 가능</span>하다</h3>
+				</section>
+				<section  data-background="image/dynamic_thank_blue.jpg">
+					<h2 style="color:#DE4182">감사합니다.</h2>
+					<br>
+					<h3>BY <a style="color:rgb(35,0,172)" href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// https://github.com/iamvdo/Reveal-liveCoding
+					{ src: '../__lib__/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script>
+$("code[contenteditable]").focusout(function(e) {
+	var $el = $(e.target);
+	eval($el.text());
+});
+		</script>
+	</body>
+</html>
+
+

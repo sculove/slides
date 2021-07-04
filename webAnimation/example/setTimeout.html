@@ -1,0 +1,54 @@
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>HTML5 Web Animation- setTimeout</title>
+<meta name="description" content="animation">
+<meta name="author" content="sculove. 손찬욱">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+.wrap {
+	position:relative;
+}
+.box {
+	border-radius:5px;
+	width : 100px;
+	height : 100px;
+	background-color: #400230;
+	position:absolute;
+	left : 0px;
+	top : 0px;
+	transform:translate3d(0,0,0);
+}
+button {
+	margin:10px 0;
+}
+</style>
+</head>
+<body>
+<button id="run">Run</button>
+<div class="wrap">
+	<div id="box" class="box"></div>
+</div>
+<script>
+function animate(el, x, y, duration) {
+	var startTime = Date.now();
+	var now, per;
+	(function loop() {
+		now = Date.now();
+		if (now >= startTime + duration) {
+			el.style.transform = "translate3d(" + x + "px," + y + "px,0)";
+			return;
+		}
+		per =  (now - startTime) / duration;
+		el.style.transform = "translate3d(" + (x * per)  + "px," +  (y * per)  + "px,0)";
+		setTimeout(loop, 16);
+	})();
+}
+
+var el=document.getElementById("box");
+document.getElementById("run").addEventListener("click", function(e) {
+	animate(el, 300, 0, 3000);
+});
+</script>
+</body>
+</html>

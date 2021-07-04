@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="ko">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Front-End 성능 개선 자동화 하기</title>
+
+		<meta name="description" content="performance">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.code > button:hover {
+	opacity: 1;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+
+blockquote {
+	width : 90% !important;
+	border-radius: 5px;
+}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/performance.jpg" data-transition="zoom" data-background-transition="zoom">
+					<h1><span class="strong">Front-End</span><br> 성능 개선 <span class="semi-strong">자동화</span>하기</h1>
+					<br>
+					<p>
+						<small>Created by <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<h3><span class="strong">Front-End</span></h3>
+					<h2>성능 이란 무엇인가?</h2>
+				</section>
+				<section>
+					<section>
+						<p><span class="strong">RAIL</span> performance model</p>
+						<img src="image/rail.png"/>
+						<small>developers.google.com <a href="http://goo.gl/axNG6r">http://goo.gl/axNG6r</a></small>
+					</section>
+					<section>
+						<h3>오늘은</h3>
+						<h2><span class="strong">Loading</span></h2>
+						<h3>에 대해서만 이야기합니다</h3>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Web</h3>
+						<img src="image/loading.jpg" style="width:90%"/>
+					</section>
+					<section>
+						<h3>Waterfall Chart</h3>
+						<img src="image/waterfallchart.png" style="width:95%">
+					</section>
+					<section>
+					<h2>Front End 성능 개선이란?</h2>
+					</section>
+					<section>
+						<div>
+							<h3 class="strong">Waterfall chart를 어떻게 개선할 것인가?</h3>
+							<img src="image/waterfallchart.png">
+						</div>
+					</section>
+					<section>
+						<div>
+							<h3>Waterfall chart를 어떻게 개선할 것인가?</h3>
+							<img src="image/wf-summary.png">
+						</div>
+					</section>
+				</section>
+
+				<section data-background="#403200">
+					<h2>우리가 개선할 페이지는?</h2><br>
+					<p><span class="strong">73</span> Request, <span class="strong">2.2MB</span> transfered</p>
+					<a href="#/4">[raw]</a>&nbsp;<a href="#/16">[tuning]</a>
+				</section>
+				<section data-background="#8c4738">
+					<h2>개선 전략</h2>
+				</section>
+				<section>
+					<section>
+						<h3>1. 목표 설정</h3>
+						<img class="fragment" src="image/rail.png"/>
+						<p class="fragment">로딩속도 <span class="semi-strong">1초!!!</span></p>
+					</section>
+					<section>
+						<h3>2. 개선 작업</h3><br>
+						<p class="fragment">측정</p>
+						<p class="fragment">분석</p>
+						<p class="fragment">최적화</p>
+						<p class="fragment">적용</p>
+						<br>
+						<p class="fragment"><strong class="semi-strong">측정 -> 분석 -> 최적화 -> 적용</strong> -> 측정 -> 분석 -> 최적화 -> 적용 -> 측정 -> 분석 -> 최적화 -> 적용 ... </p>
+					</section>
+					<section>
+						<h3>3. <span class="strong">지속적인</span> 관심</h3><br>
+					</section>
+				</section>
+				<section data-background="#8c4738">
+					<h2>귀찮은데....</h2>
+					<p>좀 알아서 되게 하면 안되나?</p>
+				</section>
+				<section>
+					<section data-background="#6d6d6d">
+						<img src="image/grunt-logo.png" style="background: transparent;border:none; box-shadow: none"/><br><br>
+						<h3>The JavaScript Task Runner</h3>
+					</section>
+					<section data-background="white">
+						<img src="image/ant-logo.png" style="background: transparent;border:none; box-shadow: none"/>
+						<img src="image/gulp-logo.png" style="background: transparent;border:none; box-shadow: none"/>
+						<img src="image/maven-logo.png" style="background: transparent;border:none; box-shadow: none"/>
+					</section>
+					<section>
+						<h3>Grunt를 왜 사용해야하나?</h3>
+						<br>
+						<ul>
+							<ol class="fragment">1. Descriptive Language</ol>
+							<ol class="fragment semi-strong">2. Programming</ol>
+							<ol class="fragment semi-strong">3. Plugin</ol>
+						</ul><br><br>
+						<p class="fragment"><span class="strong">최소의 노력</span>으로, 어떤 것이든, <span class="strong">자동화</span> 할수 있다</p>
+
+					</section>
+					<section>
+						<h3>Grunt 구조</h3>
+						<img src="image/grunt-structure.png" style="background: transparent;border:none; box-shadow: none; width:90%"/>
+					</section>
+					<section>
+						<h3>Grunt 사용을 위한 준비</h3>
+						<ul>
+							<li class="fragment">node 설치 <a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a></li>
+							<li class="fragment"><span class="strong">grunt-cli</span> 설치<pre><code>npm install grunt-cli -g</code></pre></li>
+						</ul>
+					</section>
+					<section>
+						<h3>Gruntfile.js</h3>
+						<ul style="width:80%">
+							<li>Depth1 : <span class="strong">Task</span>, property</li>
+							<li>Depth2 : <span class="strong">Target</span>, options</li>
+						</ul>
+<pre><code>grunt.initConfig({
+	// task
+	task : {
+		// option of all target
+		options : {},
+
+		// target
+		foo : {
+			// option of target
+			options : {}
+			// src와 dest
+			src : [ "src/**/*.js", "src/**/*.json" ],
+			dest : "dest/dest.js"
+		},
+		bar : {
+			 "dest" : "source"
+		},
+		zoo : {
+	     				files: [{
+						expand: true,
+						src: "<%= task.foo.dest %>",
+						dest: "<%= pkg.workspace %>/css"
+			}]
+		}
+	},
+	// property
+	pkg : grunt.file.readJSON("package.json")
+});
+grunt.loadNpmTasks("task"); 	// load task
+grunt.registerTask("default", []);	// register task
+</code></pre>
+					</section>
+					<section>
+						<h2>Grunt 맛보기 실습</h2>
+						<img src="image/grunt-start.gif" style="width:90%"/>
+					</section>
+				</section>
+				<section>
+					<section data-background="#1A3819">
+						<h2>측정, 분석하기</h2>
+					</section>
+					<section>
+						<h3>성능 지표 측정 시스템</h3>
+						<ul class="fragment">
+							<li><a href="http://www.webpagetest.org/" target="_blank">http://www.webpagetest.org</a></li>
+							<li><a href="http://httparchive.org/" target="_blank">http://httparchive.org/</a></li>
+
+							<p class="fragment">우린 이미 <span class="strong">SSA</span>가 있다...</p>
+						</ul>
+					</section>
+					<section>
+						<h3>개발환경에서 부터 확인할 순 없을까?</h3>
+						<p class="fragment">사내망에서는?</p>
+						<p class="fragment"><span class="semi-strong">private</span> 서버 환경 구성?</p>
+					</section>
+					<section>
+						<h3>grunt-devperf</h3>
+						<p><a href="https://github.com/gmetais/grunt-devperf" target="_blank">https://github.com/gmetais/grunt-devperf</a></p>
+					</section>
+					<section>
+						<img src="image/devperf.png">
+					</section>
+				</section>
+				<section data-background="#1A3819">
+					<h2>최적화, 적용하기</h2>
+				</section>
+				<section>
+					<section>
+						<h3>정적 파일 최적화 하기</h3>
+						<ul>
+							<li>JavaScript</li>
+							<li>CSS</li>
+							<li>HTML</li>
+						</ul>
+					</section>
+					<section>
+							<h3>Minify와 Obfuscation</h3>
+		<pre><code>
+	function isHWAccelerable() {
+		var result = false;
+		var agent = this.agent();
+		var osVersion = agent.os.version;
+		var browser = agent.browser.name;
+		var browserVersion = agent.browser.version;
+		var useragent;
+
+		// chrome (less then 25) has a text blur bug.
+		// but samsung sbrowser fix it.
+		if (browser.indexOf("chrome") !== -1) {
+			result = browserVersion >= "25";
+		} else if (/ie|firefox|safari|inapp/.test(browser)) {
+			result = true;
+		} else if (agent.os.name.indexOf("android") !== -1) {
+			useragent = (ua.match(/\(.*\)/) || [null])[0];
+
+			// android 4.1+ blacklist
+			// EK-GN120 : Galaxy Camera, SM-G386F : Galaxy Core LTE
+			// SHW-M420 : Galaxy Nexus , SHW-M200 : NexusS , GT-S7562 : Galaxy S duos
+			result = (osVersion >= "4.1.0" && !/EK-GN120|SM-G386F/.test(useragent)) ||
+				(osVersion >= "4.0.3" &&
+					/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(useragent) && !/SHW-M420|SHW-M200|GT-S7562/.test(useragent));
+		}
+		return resultCache(this, "isHWAccelerable", [result, agent], result);
+	}
+		</code></pre>
+	<p>1,000 Bytes</p>
+						</section>
+						<section>
+							<h3>Minify와 Obfuscation</h3>
+							<div>
+							<p>주석제거, 공백 제거 (687 Bytes)</p>
+		<pre><code>
+	function isHWAccelerable(){var result=false;var agent=this.agent();var osVersion=agent.os.version;var browser=agent.browser.name;var browserVersion=agent.browser.version;var useragent;if(browser.indexOf("chrome")!==-1){result=browserVersion>="25";}else if(/ie|firefox|safari|inapp/.test(browser)){result=true;}else if(agent.os.name.indexOf("android")!==-1){useragent=(ua.match(/\(.*\)/)||[null])[0];result=(osVersion>="4.1.0"&&!/EK-GN120|SM-G386F/.test(useragent))||(osVersion>="4.0.3"&&/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(useragent)&&!/SHW-M420|SHW-M200|GT-S7562/.test(useragent));}
+	return resultCache(this,"isHWAccelerable",[result,agent],result);}
+		</code></pre>
+	</div>
+
+	<div class="fragment">
+	<p>변수명 난독화 (491 Bytes)</p>
+		<pre><code>
+	function isHWAccelerable(){var e,r=!1,s=this.agent(),t=s.os.version,i=s.browser.name,a=s.browser.version;return-1!==i.indexOf("chrome")?r=a>="25":/ie|firefox|safari|inapp/.test(i)?r=!0:-1!==s.os.name.indexOf("android")&&(e=(ua.match(/\(.*\)/)||[null])[0],r=t>="4.1.0"&&!/EK-GN120|SM-G386F/.test(e)||t>="4.0.3"&&/SHW-|SHV-|GT-|SCH-|SGH-|SPH-|LG-F160|LG-F100|LG-F180|LG-F200|EK-|IM-A|LG-F240|LG-F260/.test(e)&&!/SHW-M420|SHW-M200|GT-S7562/.test(e)),resultCache(this,"isHWAccelerable",[r,s],r)}
+		</code></pre>
+		</div><br>
+		<h3 class="fragment"><span class="strong">50.9%</span> 감소</h3>
+						</section>
+						<section>
+							<h3>Grunt Plugin (uglify, cssmin, htmlmin)</h3>
+							<p><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-uglify">https://github.com/gruntjs/grunt-contrib-uglify</a></p>
+							<p><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-cssmin">https://github.com/gruntjs/grunt-contrib-cssmin</a></p>
+							<p><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-htmlmin">https://github.com/gruntjs/grunt-contrib-htmlmin</a></p>
+						</section>
+						<section>
+							<p>최적화 하기 전에는 꼭! <span class="strong">정적 체크</span>가 필요함</p>
+							<ul class="fragment">
+								<li><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">https://github.com/gruntjs/grunt-contrib-jshint</a></li>
+								<li><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-csslint">https://github.com/gruntjs/grunt-contrib-csslint</a></li>
+							</ul>
+						</section>
+						<section>
+							<H3>여러개의 정적파일이 존재함</H3>
+							<ul class="fragment">
+								<li><a target="_blank" href="https://github.com/gruntjs/grunt-contrib-concat">https://github.com/gruntjs/grunt-contrib-concat</a></li>
+							</ul>
+						</section>
+						<section>
+							<h3>Grunt Plugin 활용</h3>
+							<div  class="fragment">
+								<p>js 정적검사 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">grunt-contrib-jshint</a></p>
+								<p>css 정적검사 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-csslint">grunt-contrib-csslint</a></p>
+							</div>
+							<p class="fragment">js, css 파일머지 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-concat">grunt-contrib-concat</a></p>
+							<div class="fragment">
+								<p>js minify & Obfuscation <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a></p>
+								<p>css minify <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-cssmin">grunt-contrib-cssmin</a></p>
+								<p>html minify <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-htmlmin">grunt-contrib-htmlmin</a></p>
+							</div>
+						</section>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>이미지 최적화 하기</h3>
+						<img src="image/useimage.png"><br>
+						<small><a href="http://httparchive.org/interesting.php#bytesperpage" target="_blank">httparchive</a></small>
+						<p>컨텐츠 중 이미지의 비중이 가장 높다</p>
+					</section>
+					<section>
+						<p>이미지 크기가 클수록 비용은 증가한다</p>
+						<img src="image/imagesizeandnetwork.png"><br>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>그냥...이미지를 제거하자</h3>
+					</section>
+					<section>
+						<img src="image/csseffect.png">
+						<p><span class="strong">6KBytes</span> 이미지</p>
+					</section>
+					<section>
+<div id="iconDemo">
+  <a class="docIcon"></a>
+</div>
+<pre><code class="liveCoding css" data-livecoding-id="iconDemo" contenteditable>.docIcon {
+        background:#eee;
+        display:block;
+        width:80px;
+        height:112px;
+        position:relative;
+        margin:42px auto;
+        border:1px solid #ccc;
+/*
+        background:-webkit-linear-gradient(top, #ddd 0, #eee 15%, #fff 40%, #fff 70%, #eee 100%);
+        box-shadow:inset rgba(255,255,255,0.8) 0 1px 1px;
+        border-radius:3px 15px 3px 3px;
+*/
+}
+.docIcon:before {
+/*
+        content:"";
+        display:block;
+        position:absolute;
+        top:0;
+        right:0;
+        width:30px;
+        height:30px;
+        background:#ccc;
+*/
+/*
+        background:-webkit-linear-gradient(45deg, #fff 0,  #eee 50%, #ccc 100%);
+        box-shadow:rgba(0,0,0,0.05) -1px 1px 1px, inset white 0 0 1px;
+        border-bottom:1px solid #ccc;
+        border-left:1px solid #ccc;
+*/
+/*
+        border-radius:0 14px 0 0;
+*/
+}
+
+.docIcon:after {
+/*
+        content:"";
+        display:block;
+        position:absolute;
+        left:0;
+        top:0;
+        width:60%;
+        height:36px;
+        background:#ccc;
+*/
+/*
+        background:-webkit-linear-gradient(top, #ccc 0, #ccc 20%, #fff 20%, #fff 40%, #ccc 40%, #ccc 60%, #fff 60%, #fff 80%, #ccc 80%, #ccc 100%);
+*/
+/*
+        margin:40px 20% 0;
+*/
+}
+</code></pre>
+					</section>
+					<section>
+						<h4><span class="strong">6배</span>의 용량 감소</h4>
+						<img src="image/csseffect.png">
+						<p><span class="strong">1KBytes</span> CSS3 Effect</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>CSS Sprite</h3>
+						<p>network 비용도 줄이고, 이미지 용량도 줄이자</p>
+						<img src="image/todayhumor.png">
+					</section>
+					<section>
+						<img src="image/csssprite1.png">
+					</section>
+					<section>
+						<img src="image/csssprite2.png">
+						<p><span class="strong">background-image/position</span>을 이용한 CSS Sprite</p>
+						<pre><code>
+#nav li a { background-image:url("image_nav.gif"); }
+#nav li a.item1 { background-position: 0px 0px; }
+#nav li a.item2 { background-position: -72px 0px; }
+#nav li a.item3 { background-position: -144px 0px; }
+	</code></pre>
+					</section>
+					<section>
+						<h3>grunt-spritesmith</h3>
+						<p><a target="_blank" href="https://github.com/Ensighten/grunt-spritesmith">https://github.com/Ensighten/grunt-spritesmith</a></p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>고퀄리티 이미지</h3>
+						<img src="image/highq.jpg">
+					</section>
+					<section>
+						<h3>다양한 디스플레이 크기... <span class="fragment">그리고 <span class="strong">레티나</span></span></h3>
+						<img src="image/responsive.jpg">
+					</section>
+					<section>
+						<h3><span class="strong">반응형 이미지</span>를 이용한<br><br> 이미지 최적화</h3>
+					</section>
+					<section>
+						<h3>srcset을 이용</h3><pre><code>
+	&lt;img srcset="retina-image.jpg 2x" src="image.jpg" alt="an image" /&gt;
+	</code></pre>
+<p>화면의 <span class="strong">pixel ratio</span>에 맞는 이미지를 사용</p>
+					</section>
+					<section>
+						<h3>picture를 이용</h3><pre><code>
+&lt;picture&gt;
+    &lt;source media="orientation:landscape"
+    	srcset="retina-horizontal-image.jpg 2x, horizontal-image.jpg" /&gt;
+    &lt;source media="orientation:portrait"
+    	srcset="retina-vertical-image.jpg 2x, vertical-image.jpg" /&gt;
+    &lt;img src="image.jpg" alt="an image" /&gt;
+&lt;/picture&gt;
+	</code></pre>
+<p>화면의 <span class="strong">회전상태</span>에 따라</p>
+<p>화면의 pixel ratio에 맞는 이미지를 사용</p>
+					</section>
+					<section>
+						<h3>Browser Support</h3>
+						<img src="image/responsive_caniuse.png" style="width:95%"/>
+					</section>
+					<section>
+
+<h3>picturefill polyfill library</h3>
+<p><A href="http://scottjehl.github.io/picturefill/" target="_blank">http://scottjehl.github.io/picturefill/</A></p>
+<pre><code>&lt;head&gt;
+  &lt;script&gt;
+    // Picture element HTML5 shiv
+    document.createElement( "picture" );
+  &lt;/script&gt;
+  &lt;script src="picturefill.js" async&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+					</section>
+					<section>
+						<h3>grunt-responsive-images</h3>
+						<p><a target="_blank" href="https://github.com/andismith/grunt-responsive-images">https://github.com/andismith/grunt-responsive-images</a><br></p>
+					</section>
+					<section>
+						<h3>Grunt Plugin 활용</h3>
+						<ul>
+							<li>css Sprite <a target="_blank" href="https://github.com/Ensighten/grunt-spritesmith">grunt-spritesmith</a></li>
+							<li>반응형 이미지 <a target="_blank" href="https://github.com/andismith/grunt-responsive-images">grunt-responsive-images</a><br></li>
+							<li class="fragment">이미지 최적화 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-imagemin">grunt-contrib-imagemin</a></li>
+						</ul>
+					</section>
+				</section>
+				</section>
+				<section data-background="#403200">
+					<h2>얼마나 개선되었나?</h2><br>
+					<p><span class="strong">11</span> Request, <span class="strong">661 KB / 1.2MB</span> transfered</p>
+					<a href="#/4">[raw]</a>&nbsp;<a href="#/16">[tuning]</a>
+				</section>
+				<section>
+					<h3>정리 - Grunt Plugin</h3>
+					<ul>
+						<li>측정 및 분석툴 <a href="https://github.com/gmetais/grunt-devperf" target="_blank">grunt-devperf</a></li>
+						<li>js 정적검사 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-jshint">grunt-contrib-jshint</a></li>
+						<li>css 정적검사 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-csslint">grunt-contrib-csslint</a></li>
+						<li>js, css 파일머지 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-concat">grunt-contrib-concat</a></li>
+						<li>js minify & Obfuscation <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a></li>
+						<li>css minify <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-cssmin">grunt-contrib-cssmin</a></li>
+						<li>html minify <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-htmlmin">grunt-contrib-htmlmin</a></li>
+						<li>css Sprite <a target="_blank" href="https://github.com/Ensighten/grunt-spritesmith">grunt-spritesmith</a></li>
+						<li>반응형 이미지 <a target="_blank" href="https://github.com/andismith/grunt-responsive-images">grunt-responsive-images</a><br></li>
+						<li>이미지 최적화 <a target="_blank" href="https://github.com/gruntjs/grunt-contrib-imagemin">grunt-contrib-imagemin</a></li>
+					</ul>
+				</section>
+				<section>
+					<h2>예제</h2>
+					<p><a href="https://oss.navercorp.com/sculove-pe-kr/perf-example" target="_blank">https://oss.navercorp.com/sculove-pe-kr/perf-example</a></p>
+				</section>
+				<section data-background="image/dynamic_thank.jpg">
+					<h2>감사합니다.</h2>
+					<br>
+					<h3>BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					// https://github.com/iamvdo/Reveal-liveCoding
+					{ src: '../__lib__/revealjs/plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>

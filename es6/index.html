@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>ES6</title>
+
+		<meta name="description" content="ECMAScript6-ES6은 어떻게 탄생했나?">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+		<!-- <link rel="stylesheet" href="../__lib__/revealjs/lib/css/monokai-sublime.css"> -->
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<script src="../__lib__/revealjs/lib/js/jquery-1.11.3.js"></script>
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.reveal pre code {
+    max-height: 500px;
+    min-width:400px;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/javascript-door.jpg" data-transition="zoom" data-background-transition="zoom">
+					<h1 style="color:#f5da55;text-shadow: 2px 2px #000000;">ECMAScript6</h1>
+					<h3 style="text-shadow: 2px 2px #000000;">ES6은 어떻게 탄생했나?</h3>
+					<br>
+					<p>
+						<small>Created by <a style="text-shadow: 1px 1px #fff;" href="http://sculove.pe.kr" >손찬욱</a> / <a style="text-shadow: 1px 1px #fff;" href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<section data-background="#8c4738">
+						<h3 class="strong">ECMAScript6</h3>
+						<h3 class="fragment">ECMAScript Harmony</h3>
+						<h3 class="fragment">ES2015</h3>
+					</section>
+					<section>
+						<h3>JavaScript의 탄생</h3>
+						<img src="image/brendan-eich.jpg">
+						<p>Brendan Eich (브랜든 아이크) 개발</p>
+					</section>
+					<section>
+						<img src="image/netscape.png">
+						<p>1996년 3월 Netscape Navigator 2.0에서 <span class="strong">JavaScript</span> 지원</p>
+					</section>
+					<section>
+						<img src="image/ie.ico">
+						<p>1996년 8월 Internet Explorer 3.0에서 <span class="strong">JScript</span> 지원</p>
+					</section>
+					<section>
+						<img src="image/brendan-eich.jpg">
+						<p class="semi-strong">JavaScript를 널리 보급하자</p>
+					</section>
+					<section>
+						<img src="image/diff.jpg">
+						<p>표준화라... <span class="fragment semi-strong">어렵다</span></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/ecma.jpg">
+						<div class="fragment">
+							<p>1996년 12월 ECMA에 표준등록을 위한 스펙 전달</p>
+							<p><span class="strong">ECMA-262, ECMAScript</span></p>
+						</div>
+					</section>
+					<section>
+						<h5>1997년 6월 1'st Edition <span class="semi-strong">(ES1)</span></h5>
+						<h4>1998년 6월 2'nd Edition <span class="semi-strong">(ES2)</span></h4>
+						<div class="fragment">
+							<h3>1999년 12월 3'rd Edition <span class="semi-strong">(ES3)</span></h3>
+							<p>정규식, try/catch, ...</p>
+						</div>
+					</section>
+					<section>
+						<img src="image/famous.jpg">
+						<p>대다수 브라우저에서 <span class="strong">ES3</span>을 지원</p>
+						<h3>이제 진정한 업계 표준</h3>
+						<!-- <div class="fragment">
+							<p><span class="semi-strong">ECMA-357</span>, ECMAScript for XML (E4X)</p>
+							<p><span class="semi-strong">ECMA-327</span>, 임베디드 장비를 위한 컴팩트 버전</p>
+						</div> -->
+					</section>
+					<section>
+						<h3>ECMAScript4</h3>
+						<h3>이제 좀 <span class="strong">혁신적인 것</span>을 만들자</h3>
+						<img src="image/create.jpg">
+						<div class="fragment">
+							<p class="semi-strong">Classes, Module system, Generators and iterators, Destructuring assignment, etc, ...</p>
+						</div>
+					</section>
+					<section>
+						<img src="image/crockford.jpg" width="700px">
+						<p>이게 무슨 <span class="strong">JavaScript</span> 야? 절라 복잡하자너</p>
+						<p class="fragment"><span class="semi-strong">있는 것부터 잘하자!</span> ECMAScript 3.1 워킹그룹</p>
+					</section>
+					<section>
+						<h2>ES 4 <span class="strong">VS</span> ES 3.1</h2>
+					</section>
+					<section>
+						<img src="image/bad.jpg" width="400px">
+						<p>ECMAScript 4 <span class="strong">지연</span></p>
+						<p class="fragment semi-strong">ECMAScript 4 is dropped</p>
+					</section>
+					<section>
+						<h3 >사실상 <span class="strong">IE</span>가 표준</h3>
+						<img src="image/ie.png" width="550px">
+					</section>
+					<section>
+						<img src="image/sorry.png">
+						<p>두 그룹의 잡업을 합치기로 결정</p>
+					</section>
+					<section>
+						<h3>ECMAScript Harmony</span></h3>
+						<p>2008년 가을.</p>
+						<!-- <p>파벌을 합치고, 새로운 ES4 표준 작업을 위한 프로젝트</p> -->
+						<p>코드네임 <span class="strong">ECMAScript Harmony</span> 발표</p>
+						<img src="image/brendan-eich.jpg">
+					</section>
+					<section>
+						<p>ES4의 완성된 스펙을 <span class="semi-strong">ES5</span>로 지정</p>
+						<p>ES4 나머지 스펙은 <span class="strong">ECMAScript Harmony</span>로 진행</p>
+					</section>
+					<!-- <section>
+						<img src="image/brendan-eich.jpg">
+						<p>JSConf.us 2011에서, <span class="strong">JavaScript의 표준은 커뮤니티가 주도해야 한다.</span></p>
+						<p class="fragment">Tranpiler (Transcompiler) - CoffeScript, Traceur, ...</p>
+						<p class="fragment">Class 기반 OOP ...</p>
+					</section> -->
+					<section>
+						<img src="image/es6start.jpeg">
+						<p>2009년 12월. <span class="strong">ES5</span> 표준 발표. 두둥~!</p>
+					</section>
+					<section>
+						<img src="image/nostyle.jpg">
+					</section>
+					<!-- <section>
+						<img src="image/attr.jpg">
+					</section> -->
+					<section>
+						<img src="image/same.jpg" width="500px">
+						<p><span class="semi-strong">ECMAScript 3.1 기반</span>, <span class="strong">No New Syntax</span></p>
+						<p><span class="semi-strong">Strict mode</span>, <span class="strong">JSON</span>, property define, ... </p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/es6start.jpeg">
+						<p>2015년 6월 <span class="semi-strong">ES6</span>의 최종안인 <span class="strong">ES2015</span>를 발표 두둥~!</p>
+					</section>
+					<section>
+						<img src="image/em1.jpg">
+						<p>외국인도 열광하고</p>
+					</section>
+					<section>
+						<img src="image/em2.gif">
+						<p>한국인들도 열광하고</p>
+					</section>
+					<section>
+						<img src="image/why.jpg">
+						<p>도대체 <span class="strong">ES6</span>이 뭐길래?</p>
+					</section>
+					<section>
+						<img src="image/sobe.jpg" width="500px"><br>
+					</section>
+					<section>
+						<h3>복잡해진 <span class="strong">웹애플리케이션</span> 개발에 적합한 스펙</h3><br>
+						<p><span class="semi-strong">Classes</span>, <span class="semi-strong">Module system</span>, Reflect, <span class="semi-strong">Promise</span>, Proxy, Generators and iterators, <span class="semi-strong">Destructuring assignment</span>, etc, ...</p>
+					</section>
+					<section>
+						<h3>더불어...</h3>
+					</section>
+					<!--ES6이 뭐냐하면?
+						바로 웹애플리케이션을 만들기에 짱 좋았거든
+						웹애플리케이션을 만들려면...
+						클래스도 라이브러리 써야하고,
+						모듈도 라이브러리 써야하고,
+						아~ 비동기 개발 복작하는 경우도 라이브러리 써야하고,-->
+					<!-- <section>
+						<img src="image/endie.png">
+						<img src="image/iedie.jpeg">
+						<small><a href="https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support?imm_mid=0dd220&cmp=em-web-na-na-newsltr_20151202">IE11 이하 지원 중단</a></small>
+						<p>골치 아픈 IE도 바이</p>
+					</section> -->
+					<section>
+						<img src="image/support.jpg">
+						<p>강력한 지원군</p>
+					</section>
+					<section>
+						<img src="image/react.png">
+						<p><span class="semi-strong">JSX</span>로 변환해야하는 김에 <span class="strong">ES6</span>도 함께 지원한다</p>
+					</section>
+					<section>
+						<img src="image/angular2.png">
+						<p><span class="semi-strong">TypeScript</span>를 써야하는 나도 <span class="strong">ES6</span>을 지원한다</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>잠깐 살펴보는</h3>
+						<h2 class="strong">ES2015</h2>
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330"> Arrow Function </h2>
+					</section>
+					<section>
+					 <h3>JavaScript에게 <span class="strong">this</span> 란?</h3>
+					 <img src="image/confuse.jpg">
+					 <p class="fragment semi-strong">호출 시점에 따라 this가 달라진다</p>
+					 <!-- <p>target.method같이 호출하는 경우, this는 target</p>
+					 <p>target이 없는 경우에는 global(window)</p> -->
+					</section>
+					<section>
+						<h3>ES6 이전의 함수</h3>
+						<p><span class="strong">self</span> 나 <span class="strong">Function.prototype.bind</span> 없인 못살아</p>
+						<pre><code class="js" data-noescape>var obj = {
+  print: function() {},
+  printAll: function(args) {
+    <mark>var self = this;</mark>
+    args.forEach(function(v) {
+       self.print(v);	// this는?
+    });
+  }
+}
+
+obj.print() // this is obj
+</code></pre>
+
+					</section>
+					<section>
+						<h3>ES6의 Arrow function</h3>
+						<blockquote>(파라미터)=>{함수 본체}</blockquote>
+						<p>self 없이, 간결히 사용할수 있다</p>
+						<pre><code class="js" data-noescape>var obj = {
+  print: function() {
+  },
+  printAll: function() {
+    args.forEach(<mark>(v) => this.print(v)</mark>);
+  }
+}</code></pre>
+						<p>arrow function을 감싸는 외부 scope를 사용</p>
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330"> Class & inheritance </h2>
+					</section>
+					<section>
+						<h3>ES5의 Class와 inheritance 구현 방법</h3>
+						<p>Object.create와 prototype을 이용</p>
+					<pre><code class="js" data-noescape>// 생성자
+function Parent(name){
+  this._name = name;
+}
+
+Parent.prototype = Object.create(null, {
+	constructor: {
+		value: Parent
+	},
+	say: {
+		value: function() {
+		  return 'My name is ' + this._name;
+		}
+	}
+});</code></pre>
+					</section>
+					<section>
+						<h3>ES5의 Class와 inheritance 구현 방법 (계속)</h3>
+					<pre><code class="js" data-noescape>
+// 생성자
+function Child(name) {
+  <mark>Parent.apply(this, arguments);</mark>	// 상위클래스 생성자 호출
+}
+
+Child.prototype = Object.create(<mark>Parent.prototype</mark>, {
+  constructor: {
+    value: Child
+  },
+
+  say: {
+    value: function() {
+    	// 상위클래스 메소드 호출
+	<mark>var superClassPrototype =  Object.getPrototypeOf(this.constructor.prototype);</mark>
+	return '[Child] ' + superClassPrototype.say.call(this);
+    }
+  }
+});</code></pre>
+					</section>
+					<section>
+						<h3>ES6의 class와 inheritance</h3>
+						<p>class, constructor, extends, super</p>
+					<pre><code class="js" data-noescape><mark>class</mark> Parent {
+	// 생성자
+	constructor(name) {
+		this._name = name;
+	}
+	say() {
+		return 'My name is ' + this._name;
+	}
+}
+
+<mark>class</mark> Child <mark>extends</mark> Parent {
+	// 생성자
+	constructor(name) {
+		super(name);
+	}
+	say() {
+		return '[Child] ' + <mark>super</mark>.say();
+	}
+}</code></pre>
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330"> Modules </h2>
+					</section>
+					<section>
+						<p>JavaScript에게 <span class="semi-strong">전역 영역</span>이란?</p>
+					 	<div class="fragment">
+					 		<p>복잡한데 좀 쪼개서 사용할수 없을까?</p>
+					 		<p>쪼갠걸 재사용할수는 없을까?</p>
+					 	</div>
+
+					 	<blockquote class="fragment"><span class="strong">독립적인 실행영역(scope)</span>이 있고, <span class="semi-strong">정의</span>하고 <span class="semi-strong">사용</span>하는 모듈이 필요함</blockquote>
+					</section>
+					<section>
+						<h3>ES6 이전의 module 구현 방법</h3>
+						<ul>
+							<li>IIFE : Immediately-Invoked Function Expression</li>
+							<pre><code class="js" data-noescape>(function(window) {
+  // 결과를 윈도우에 import
+  window.math = math;
+})(window);</code></pre>
+							<li>AMD : <span class="strong">requireJs</span></li>
+							<pre><code class="js" data-noescape>define(function() {
+	return math;
+});
+require( ["math"], function(math) {
+});</code></pre>
+							<li>CommonJS : <span class="strong">node</span></li>
+							<pre><code class="js" data-noescape>// math라는 이름으로 export
+exports.math = math;
+// 사용시에는 require
+var math = require("./math").math;</code></pre>
+							<li>UMD : IIFE + AMD + CommonJS</li>
+						</ul>
+					</section>
+					<section>
+						<h3>ES6의 module 구현 방법</h3>
+						<p>export와 import를 이용</p>
+					<pre><code class="js" data-noescape>// 모듈을 생성할 때
+// lib/math.js
+export function sum(x, y) {
+  return x + y;
+}
+export var pi = 3.141593;</code></pre>
+
+					<pre><code class="js" data-noescape>// 모듈을 사용할 때
+import * as math from "lib/math";
+alert("2π = " + math.sum(math.pi, math.pi));
+alert("2π = " + sum(pi, pi));</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330"> Promise </h2>
+					</section>
+					<section>
+						<p>이벤트의 <span class="strong">순차적 실행</span> or 애니메이션의 <span class="strong">순차적 진행</span></p>
+					</section>
+					<section>
+						<h3>ES6 이전의 비동기식 프로그래밍 구현 방법</h3>
+						<p>비동기 로직의 순차적 실행</p>
+						<p class="semi-strong">callback hell</p>
+						<pre><code class="js" data-noescape>async1(function(input, result1) {
+  async2(function(result2) {
+    async3(function(result3) {
+      async4(function(result4) {
+        async5(function(output) {
+            // do something with output
+        });
+      });
+    });
+  });
+})</code></pre>
+					</section>
+					<section>
+						<h3>ES6 이전의 비동기식 프로그래밍 구현 방법 (계속)</h3>
+						<p>Q, jQuery.Defferred 와 같은 라이브러리 사용</p>
+						<p class="strong">에러처리, 순서 보장</p>
+						<pre><code class="js" data-noescape>Q.fcall(async1)
+.then(async2)
+.then(async3)
+.then(async4)
+.then(function (output) {
+    // do something with output
+})
+.catch(function (error) {
+    // Handle any error from all above steps
+})
+.done();</code></pre>
+					</section>
+					<section>
+						<h3>ES6의 Promise 구현 방법</h3>
+						<p>Promise 객체를 이용</p>
+						<pre><code class="js" data-noescape>function timeout(duration = 0) {
+    return new <mark>Promise</mark>((resolve, reject) => {
+        setTimeout(resolve, duration);
+    })
+}
+
+var p = timeout(1000).then(() => {
+    return timeout(2000);
+}).then(() => {
+    throw new Error("hmm");
+}).catch(err => {
+    return <mark>Promise</mark>.all([timeout(100), timeout(200)]);
+});</code></pre>
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330"> 그 외 개발의 편의성 </h2>
+						<ul>
+							<li>Default parameter</li>
+							<li>Enhanced Object literals</li>
+							<li>Template string</li>
+							<li>The destructuring assignment</li>
+							<li>The spread operator</li>
+						</ul>
+					</section>
+					<section>
+						<h3>The Default parameter</h3>
+						<p>기본값 지정</p>
+						<pre><code class="js" data-noescape>function test(<mark>name = "son"</mark>, job, <mark>age = 20</mark>) {
+	job = job || "programmer";
+
+	// "son" 20 "programmer"
+    	console.log(name, job, age);
+}</code></pre>
+					</section>
+					<section>
+						<h3>Enhanced Object literals</h3>
+						<p>객체 생성시, 동적으로 키 할당하기</p>
+						<pre><code class="js" data-noescape>var str = "name";
+
+// ES6 이전
+var obj = { };
+obj["first" + str] = "son";
+console.log(es6obj); // { "firstname" : "son" }
+
+// ES6
+var es6obj = <mark>{ [“first” + str] : “son” };</mark>
+console.log(es6obj); // { "firstname" : "son" }</code></pre>
+					</section>
+					<section>
+						<h3>Template string</h3>
+						<p>템플릿 기능을 지원</p>
+						<pre><code class="js" data-noescape>var name = "son", time = "today";
+
+// Hello son, how are you today?
+console.log(`Hello <mark>${name}</mark>, how are you <mark>${time}</mark>?`);</code></pre>
+					</section>
+
+
+					<section>
+						<h3>The Destructuring assignment</h3>
+						<p>한꺼번에 지정하기</p>
+						<pre><code class="js" data-noescape>var <mark>[a3, b3, c3 = "기본값"] = [1,2]</mark>;
+console.log(a3); // 1
+console.log(b3); // 2
+console.log(c3); // "기본값"
+</code></pre>
+					</section>
+
+					<section>
+						<h3>The spread operator (...)</h3>
+						<p>데이터를 펼쳐서 지정하기</p>
+						<pre><code class="js" data-noescape>function test(a,b,c, <mark>...args</mark>) {
+   console.log(a,b,c); // 1, 10, 8
+   console.log(args); // ["abc", "efg"]
+}
+
+test(<mark>...[1,10,8, "abc", "efg"]</mark>);</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>그렇다면, 지금 <span class="strong">ES6</span>을 사용할수 있나?</h3>
+					</section>
+					<section>
+						<p>지원 브라우저는... <span class="strong">불가능</span></p>
+						<img src="image/browser1.png">
+						<img src="image/browser2.png">
+					</section>
+					<section>
+						<p><span class="semi-strong">tranpiler(transcompiler)</span>를 이용시... <span class="strong">가능</span></p>
+						<img src="image/compiler.png"><br>
+						<p>Proxy, own property를 제외하고는 모두 사용가능</p>
+						<small><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></small>
+					</section>
+				</section>
+				<section>
+					<img src="image/newjavascript.jpg" width="500px">
+				</section>
+				<section>
+					<h2>Reference</h2>
+					<ul style="font-size:24px;line-height:35px">
+						<li>
+							JavaScript.next에 대해서<br>
+							<a href="https://blog.outsider.ne.kr/643" target="_new">https://blog.outsider.ne.kr/643</a>
+						</li>
+						<li>
+							ECMAScript<br>
+							<a href="https://en.wikipedia.org/wiki/ECMAScript" target="_new">https://en.wikipedia.org/wiki/ECMAScript</a>
+						</li>
+						<li>
+							ES6시대의 JavaScript<br>
+							<a href="https://gist.github.com/marocchino/841e2ff62f59f420f9d9" target="_new">https://gist.github.com/marocchino/841e2ff62f59f420f9d9</a>
+						</li>
+						<li>
+							Learn ES2015<br>
+							<a href="https://babeljs.io/docs/learn-es2015/" target="_new">https://babeljs.io/docs/learn-es2015/</a>
+						</li>
+						<li>
+							JavaScript History<br>
+							<a href="http://www.slideshare.net/rhio.kim/javascript-history-8390737" target="_new">http://www.slideshare.net/rhio.kim/javascript-history-8390737</a>
+						</li>
+					</ul>
+				</section>
+				<section  data-background="image/beginning.jpg">
+					<h2 style="color:#DE4182">감사합니다.</h2>
+					<br>
+					<h3>BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script>
+$("code[contenteditable]").focusout(function(e) {
+	var $el = $(e.target);
+	eval($el.text());
+});
+		</script>
+	</body>
+</html>
+
+

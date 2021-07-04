@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>진화의 시작 - 2016년 FrontEnd 개발 동향 및 전망</title>
+
+		<meta name="description" content="2016년 FrontEnd 트렌드">
+		<meta name="author" content="sculove. 손찬욱">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../__lib__/revealjs/css/reveal.css">
+		<link rel="stylesheet" href="../__lib__/revealjs/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../__lib__/revealjs/lib/css/zenburn.css">
+		<!-- <link rel="stylesheet" href="../__lib__/revealjs/lib/css/monokai-sublime.css"> -->
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../__lib__/revealjs/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37362821-4', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<script src="../__lib__/revealjs/lib/js/jquery-1.11.3.js"></script>
+		<style>
+.strong {
+	color: #FF5E99 !important;
+}
+.semi-strong {
+	color : #268bd2 !important;
+}
+.reveal pre code {
+    max-height: 500px;
+    min-width:400px;
+}
+
+ul,ol {
+	margin : 0px !important;
+}
+
+li {
+	margin-top : 10px !important;
+	font-size : 0.8em !important;
+}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="image/ev_start.jpg" data-transition="zoom" data-background-transition="zoom">
+					<h1 style="color:#f5da55;text-shadow: 2px 2px #000000;">진화의 시작</h1>
+					<h3 style="text-shadow: 2px 2px #000000;">2016 Front-End 개발 동향</h3><br>
+					<p>
+						<small>Created by <a style="text-shadow: 1px 1px #fff;" href="http://sculove.github.io" >손찬욱</a> / <a style="text-shadow: 1px 1px #fff;" href="https://www.facebook.com/chanuk.son">chanuk.son</a></small>
+					</p>
+				</section>
+				<section>
+					<section>
+					<h3>손찬욱</h3>
+					<p>아내와 아들 그리고 딸밖에 모르는 개발자</p><br>
+					<div style="float:left;width:50%">
+						<img src="image/family_new.png" style="background:none;box-shadow:none" height="300px">
+					</div>
+					<div style="float:left;width:50%">
+						<ul>
+							<li><img src="image/naver_logo.png" style="background:none;box-shadow:none;margin:0" width="200px"> 재직 중</li>
+							<li><span class="semi-strong">JMC(Jindo Mobile Component)</span>, <span class="strong">egjs</span> 개발</li>
+							<li>iScroll Committer</li>
+							<li>"네이버는 이렇게 한다! 쉽고 빠른 모바일 웹 UI 개발" 저자</li>
+						</ul>
+					</div>
+					</section>
+					<section>
+						<p><span class="strong">egjs</span>는 jQuery기반의<br> 플리킹,무한스크롤과 같은 UI 인터렉션 관련 통합 라이브러리</p>
+						<iframe width="700" height="400" src="https://www.youtube.com/embed/NyFtShC2yq8" frameborder="0" allowfullscreen></iframe>
+						<p>eg.InfiniteGrid <span class="strong">VS</span> Masorny</p>
+					</section>
+				</section>
+				<section data-background="#8c4738">
+					<h1 class="strong">ES2015</h1>
+					<div class="fragment">
+						<h3>ECMAScript6</h3>
+						<h3>ES6</h3>
+					</div>
+				</section>
+				<section>
+					<h3>JavaScript의 탄생</h3>
+					<img src="image/brendan-eich.jpg">
+					<p>Brendan Eich (브랜든 아이크) 개발</p>
+					<small>1996년 3월 Netscape Navigator 2.0에서 JavaScript 지원</small>
+					<small>1996년 8월 Internet Explorer 3.0에서 JScript 지원</small>
+				</section>
+				<section>
+					<img src="image/diff.jpg">
+					<p>표준화로 널리 이롭게 하라... </p>
+				</section>
+				<section>
+					<img src="image/ecma.jpg">
+					<div class="fragment">
+						<p>1996년 12월 ECMA에 표준등록을 위한 스펙 전달</p>
+						<p><span class="strong">ECMA-262, ECMAScript</span></p>
+					</div>
+				</section>
+				<section>
+					<section>
+						<h5>1997년 6월 1'st Edition <span class="semi-strong">(ES1)</span></h5>
+						<h4>1998년 6월 2'nd Edition <span class="semi-strong">(ES2)</span></h4>
+						<div class="fragment">
+							<h3>1999년 12월 3'rd Edition <span class="semi-strong">(ES3)</span></h3>
+							<p>정규식, try/catch, ...</p>
+						</div>
+					</section>
+					<section>
+						<img src="image/famous.jpg">
+						<p>대다수 브라우저에서 <span class="strong">ES3</span>을 지원</p>
+						<h3>이제 진정한 업계 표준</h3>
+						<!-- <div class="fragment">
+							<p><span class="semi-strong">ECMA-357</span>, ECMAScript for XML (E4X)</p>
+							<p><span class="semi-strong">ECMA-327</span>, 임베디드 장비를 위한 컴팩트 버전</p>
+						</div> -->
+					</section>
+					<section>
+						<h3>ECMAScript4</h3>
+						<h3>이제 좀 <span class="strong">혁신적인 것</span>을 만들자</h3>
+						<img src="image/create.jpg">
+						<div class="fragment">
+							<p class="semi-strong">Classes, Module system, Generators and iterators, Destructuring assignment, etc, ...</p>
+						</div>
+					</section>
+					<section>
+						<img src="image/crockford.jpg" width="700px">
+						<p>이게 무슨 <span class="strong">JavaScript</span> 야? 절라 복잡하자너</p>
+						<p class="fragment"><span class="semi-strong">있는 것부터 잘하자!</span> ECMAScript 3.1 워킹그룹</p>
+					</section>
+					<section>
+						<h2>ES 4 <span class="strong">VS</span> ES 3.1</h2>
+					</section>
+					<section>
+						<img src="image/bad.jpg" width="300px">
+						<p>ECMAScript 4 <span class="strong">지연</span></p>
+						<small>2008년 완료가 목표</small>
+						<p class="fragment semi-strong">ECMAScript 4 is dropped</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>사실상 <span class="strong">IE</span>가 표준</h3>
+						<img src="image/ie.png" width="550px">
+					</section>
+					<section>
+						<h3>커뮤니티 내의 현실적인 표준</h3>
+						<h3><span class="strong">jQuery</span></h3>
+						<img src="image/jquery.png">
+					</section>
+					<section>
+						<h3>ECMAScript ?</h3>
+						<img src="image/depress.jpg">
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/sorry.png">
+						<p>두 그룹의 잡업을 합치기로 결정</p>
+					</section>
+					<section>
+						<h3>ECMAScript Harmony</span></h3>
+						<p>2008년 가을.</p>
+						<!-- <p>파벌을 합치고, 새로운 ES4 표준 작업을 위한 프로젝트</p> -->
+						<p>코드네임 <span class="strong">ECMAScript Harmony</span> 발표</p>
+						<img src="image/brendan-eich.jpg">
+					</section>
+					<section>
+						<p>ES4의 완성된 스펙을 <span class="semi-strong">ES5</span>로 지정</p>
+						<p>ES4 나머지 스펙은 <span class="strong">ECMAScript Harmony</span>로 진행</p>
+					</section>
+					<section>
+						<img src="image/es6start.jpeg">
+						<p>2009년 12월. <span class="strong">ES5</span> 표준 발표. 두둥~!</p>
+					</section>
+					<section>
+						<img src="image/nostyle.jpg">
+					</section>
+					<!-- <section>
+						<img src="image/attr.jpg">
+					</section> -->
+					<section>
+						<img src="image/same.jpg" width="500px">
+						<p><span class="semi-strong">ECMAScript 3.1 기반</span>, <span class="strong">No New Syntax</span></p>
+						<p><span class="semi-strong">Strict mode</span>, <span class="strong">JSON</span>, property define, ... </p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/es6start.jpeg">
+						<p>2015년 6월 <span class="semi-strong">ES6</span>의 최종안인 <span class="strong">ES2015</span>를 발표 두둥~!</p>
+					</section>
+					<section>
+						<img src="image/em1.jpg">
+						<p>외국인도 열광하고</p>
+					</section>
+					<section>
+						<img src="image/em2.gif">
+						<p>한국인들도 열광하고</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/why.jpg">
+						<p>도대체 <span class="strong">ES6</span>이 뭐길래?</p>
+					</section>
+					<section>
+						<img src="image/sobe.jpg" width="500px"><br>
+					</section>
+					<section>
+						<h3>복잡해진 <span class="strong">웹애플리케이션</span> 개발에 적합한 스펙</h3><br>
+						<p><span class="semi-strong">Classes</span>, <span class="semi-strong">Module system</span>, Reflect, <span class="semi-strong">Promise</span>, Proxy, <span class="semi-strong">Generators and iterators</span>, Destructuring assignment, etc, ...</p>
+					</section>
+					<section>
+						<h3>무엇보다도,</h3>
+						<div class="fragment">
+							<p>TC39 위원회가 아닌...</p>
+							<h3><span class="strong">커뮤니티</span>의 의견이 반영된 표준</h3>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<img src="image/brendan-eich.jpg">
+						<p>JSConf.us 2011</p>
+						<span class="strong">JavaScript의 표준은 커뮤니티가 주도해야 한다.</span></p>
+					</section>
+					<section>
+						<img src="image/crockford.jpg" width="700px">
+						<h3>Me, too</h3>
+					</section>
+					<section>
+						<h3>JS.next (ES6, ES7, ...) 는</h3>
+						<h3><span class="strong">커뮤니티</span>의 의견을 반영하는 <span class="semi-strong">오픈소스 표준</span></h3>
+					</section>
+					<section>
+					<h3>그 첫번째 결과물이 <span class="strong">ES6(ES2015)</span> </h3>
+					</section>
+				</section>
+				<section>
+					<h3>ES6 브라우저 지원현황</h3>
+					<p>2016년말까지 <span class="strong">90~95%</span>에 달할 것으로 예상</p>
+					<img src="image/browser1.png">
+					<img src="image/browser2.png">
+					<small><a href="https://kangax.github.io/compat-table/es6/" target="_blank">https://kangax.github.io/compat-table/es6</a></small>
+
+				</section>
+				<section>
+					<h3>하지만, 현실은...</h3>
+					<div class="fragment">
+					<p>여전히 <span class="semi-strong">IE와 ES3</span></p>
+					<img src="image/real.jpg">
+				</section>
+
+				<section>
+					<h3>그렇다면, 지금 <span class="strong">ES6</span>을 사용할 수는 없나?</h3>
+				</section>
+				<section>
+					<p><span class="semi-strong">transpiler(transcompiler)</span>를 이용시... <span class="strong">가능</span></p>
+					<img src="image/compiler.png"><br>
+					<p>Proxy, own property를 제외하고는 모두 사용가능</p>
+					<small><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></small>
+				</section>
+				<section>
+					<h3><span class="semi-strong">JavaScript</span>를 또 <span class="semi-strong">JavaScript</span>로 변환해야 하나?</h3>
+					<img src="image/fuck.jpg">
+				</section>
+				<section>
+					<section>
+						<img src="image/support.jpg">
+						<p>강력한 지원군</p>
+					</section>
+					<!--ES6이 뭐냐하면?
+						바로 웹애플리케이션을 만들기에 짱 좋았거든
+						웹애플리케이션을 만들려면...
+						클래스도 라이브러리 써야하고,
+						모듈도 라이브러리 써야하고,
+						아~ 비동기 개발 복작하는 경우도 라이브러리 써야하고,-->
+					<!-- <section>
+						<img src="image/endie.png">
+						<img src="image/iedie.jpeg">
+						<small><a href="https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support?imm_mid=0dd220&cmp=em-web-na-na-newsltr_20151202">IE11 이하 지원 중단</a></small>
+						<p>골치 아픈 IE도 바이</p>
+					</section> -->
+					<section>
+						<img src="image/react.png">
+						<p><span class="semi-strong">JSX</span>로 변환해야한다. <span class="strong">ES6</span>도 지원한다</p>
+					</section>
+					<section>
+						<img src="image/angular2.png">
+						<p><span class="semi-strong">TypeScript</span>로 변환해야한다. <span class="strong">ES6</span>도 지원한다</p>
+					</section>
+					<section>
+						<p>이렇게 된 이상 <span class="strong">ES6</span>을 지원한다</p>
+						<img src="image/gogogo.jpg">
+					</section>
+				</section>
+				<section>
+					<h3><span class="strong">네이버</span>에서는...</h3>
+					<img src="image/naver.png">
+					<p>동영상 플레이어 (IE8~, Android2.x~), 스마트 에디터 3.0 (IE10~)</p>
+				</section>
+				<section>
+					<h2><span class="strong">JavaScript</span> 올해의 운세</h2>
+					<img src="image/hu.jpg">
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330">ES2017</h2>
+					</section>
+					<section>
+						<h2>ES2017</h2>
+						<p>2016년 완료예정</p>
+						<ul>
+							<li>exponentiation operator</li>
+							<li>Array.prototype.includes</li>
+							<li>SIMD</li>
+							<li><span class="strong">Async functions</span></li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330">Framework</h2>
+					</section>
+					<section>
+						<h2>jQuery</h2>
+						<small>2005.8.22 ~ 현재</small><br>
+						<img src="image/jquery_use.png" width="700px">
+						<small><a href="http://trends.builtwith.com/javascript/jQuery" target="_blank">http://trends.builtwith.com/javascript/jQuery</a></small>
+					</section>
+					<section>
+						<p>더 이상 필요 없다. 직관적인 인터페이스 때문에 사용한다 ... </p>
+						<img class="fragment" src="image/last.png">
+					</section>
+					<section>
+						<h2>React</h2>
+						<small>2013.5 ~ 현재</small>
+						<p>2016년 stackoverflow에서 가장 유행한 기술</p>
+						<img src="image/react-trend.png">
+						<small><a href="http://stackoverflow.com/research/developer-survey-2016#technology-trending-tech-on-stack-overflow" target="_blank">http://stackoverflow.com/research/developer-survey-2016</a></small>
+					</section>
+					<section>
+						<p>React를 사용하고 있는 대규모 서비스</p>
+						<small><a href="https://github.com/facebook/react/wiki/Sites-Using-React" target="_blank">https://github.com/facebook/react/wiki/Sites-Using-React</a></small><br>
+						<img src="image/fb.png" height="100px"><img src="image/twitter.png" height="100px"><img src="image/yahoo.jpeg" height="100px"><img src="image/netflix.png" height="100px">
+					</section>
+					<section>
+						<p><span class="strong">Virtual DOM</span>과 같은 React 개념의 <span class="semi-strong">확산</span></p>
+						<p>많은 개발자가 <span class="semi-strong">React를 학습</span></p>
+					</section>
+					<section>
+						<h2>Angular</h2>
+						<p>2016년 Front-End 개발자에게 인기있는 기술 2위</p>
+						<img src="image/angular-trend.png">
+						<small><a href="http://stackoverflow.com/research/developer-survey-2016#most-popular-technologies-per-occupation" target="_blank">http://stackoverflow.com/research/developer-survey-2016</a></small>
+					</section>
+					<section>
+						<h2>Angular2 Release</h2>
+						<small>현재 Angular 2.0 Beta 진행 중. 2016년에 정식 배포될 예정</small><br>
+						<p>Angular 2는 AngularJS 1보다 <span class="strong">10배 빠른 성능</span></p>
+					</section>
+					<section>
+						<p>많은 개발자가 AngularJS 1을 벗어나 <span class="semi-strong">Angular 2로 이동</span>할 것</p>
+						<p>엔터프라이즈 영역에서는 <span class="strong">AngularJS 1의 사용이 계속</span> 이어질 것</p>
+					</section>
+					<section>
+						<h2>Others</h2>
+						<img src="image/ember.png" height="200px">
+						<img src="image/webcomponent.png" height="200px">
+						<img src="image/polymer.png">
+					</section>
+				</section>
+				<section>
+					<section data-background="#f5da55">
+						<h2 style="color:#323330">JavaScript의 새로운 영역</h2>
+					</section>
+					<section>
+					 	<h3>Universal/Portable/Isomorphic JavaScript</h3>
+					 	<p class="strong">Full stack language</p>
+					 	<p>React, Angular2, NodeJs, ...</p>
+					</section>
+					<section>
+						<h3>Mobile APP</h3>
+						<p>Cordova, React Native, ...</p>
+						<img src="image/cordova.jpg" height="100px">&nbsp;&nbsp;<img src="image/react-native.png" height="100px">
+					</section>
+					<section>
+						<h3>Desktop APP</h3>
+						<p>NodeWebkit, Electron, ...</p>
+						<img src="image/nw.png" height="100px">&nbsp;&nbsp;<img src="image/electron.png" height="100px">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>2016년에는...</h2>
+	 					<ul>
+							<li>Transpiler,polyfill의 사용으로<br>
+							<span class="semi-strong">브라우저 호환성</span>에 대한 중요도 감소</li>
+	 						<li class="fragment">개발자들이 <span class="semi-strong">ES6</span>을 적극적으로 사용할 것</li>
+	 						<li class="fragment">새로운 영역으로 JavaScript가 더 많이 활용 될 것. <br>
+	 						<span class="strong">One Language == One Developer</span></li>
+	 					</ul>
+	 				</section>
+ 					<section>
+						<img src="image/yaho.gif">
+						<h3>운수대통</h3>
+					</section>
+				</section>
+				<section>
+					<h3>How to live<h3>
+ 					<img src="image/evol.jpg">
+				</section>
+				<section>
+					<a href="https://github.com/naver/egjs">https://github.com/naver/egjs</a>
+					<img src="image/egjs_star.png">
+					<p>여러분의 <span class="strong">스타</span> 하나가 저희에게는 큰 힘이 됩니다</p>
+				</section>
+				<section>
+					<h2>Reference</h2>
+					<ul style="font-size:24px;line-height:35px">
+						<li>
+							JavaScript.next에 대해서<br>
+							<a href="https://blog.outsider.ne.kr/643" target="_new">https://blog.outsider.ne.kr/643</a>
+						</li>
+						<li>
+							ECMAScript<br>
+							<a href="https://en.wikipedia.org/wiki/ECMAScript" target="_new">https://en.wikipedia.org/wiki/ECMAScript</a>
+						</li>
+						<li>
+							ES6시대의 JavaScript<br>
+							<a href="https://gist.github.com/marocchino/841e2ff62f59f420f9d9" target="_new">https://gist.github.com/marocchino/841e2ff62f59f420f9d9</a>
+						</li>
+						<li>
+							Learn ES2015<br>
+							<a href="https://babeljs.io/docs/learn-es2015/" target="_new">https://babeljs.io/docs/learn-es2015/</a>
+						</li>
+						<li>
+							JavaScript History<br>
+							<a href="http://www.slideshare.net/rhio.kim/javascript-history-8390737" target="_new">http://www.slideshare.net/rhio.kim/javascript-history-8390737</a>
+						</li>
+						<li>
+							THE FUTURE OF JAVASCRIPT—2016 AND BEYOND<br>
+							<a href="http://www.telerik.com/campaigns/kendo-ui/javascript-future" target="_new">http://www.telerik.com/campaigns/kendo-ui/javascript-future</a>
+						</li>
+					</ul>
+				</section>
+				<section  data-background="image/beginning.jpg">
+					<h2 style="color:#DE4182">감사합니다.</h2>
+					<br>
+					<h3>BY <a href="http://sculove.pe.kr">손찬욱</a> / <a href="https://www.facebook.com/chanuk.son">chanuk.son</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../__lib__/revealjs/lib/js/head.min.js"></script>
+		<script src="../__lib__/revealjs/js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber : true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../__lib__/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../__lib__/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../__lib__/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../__lib__/revealjs/plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.body.classList; }},
+					{ src: '../__lib__/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script>
+$("code[contenteditable]").focusout(function(e) {
+	var $el = $(e.target);
+	eval($el.text());
+});
+		</script>
+	</body>
+</html>
+
+

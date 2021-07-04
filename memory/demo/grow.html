@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="../../__lib__/reveal.js-3.3.0/lib/css/darkula.css">
+<script src="../../__lib__/reveal.js-3.3.0/plugin/highlight/highlight.pack.js"></script>
+</head>
+<body>
+  <h1>Memory Grow</h1>
+  <ol>
+    <li>Open new secret window</li>
+    <li>Open DevTools</li>
+    <li>Select Timeline Tab</li>
+    <li>Select Memory</li>
+    <li>Record
+      <ol>
+        <li>Push The start Button</li>
+        <li>Force The GC</li>
+        <li>Wait a minute...</li>
+        <li>Force The GC</li>
+        <li>Wait a minute...</li>
+        <li>Force The GC</li>
+        <li>Wait a minute...</li>
+        <li>Force The GC</li>
+      </ol>
+    </li>
+    <li>Stop Record</li>
+    <li>Push The stop Button</li>
+  </ol><button onclick="start()">The start Button</button>
+  <button onclick="stop()">The stop Button</button>
+  <pre><code>var running = true;
+var x = [];
+function createNodes() {
+    var frag = document.createDocumentFragment();
+    for (var i=100; i > 0; i--) {
+      frag.appendChild(document.createElement('div'));
+    }
+    document.getElementById('nodes').appendChild(frag);
+}
+
+function start() {
+  running = true;
+  console.info("start...");
+  grow();
+}
+
+function grow() {
+  if(running) {
+    console.info("1초 간격으로 running");
+    x.push(new Array(1000000).join('x'));
+    createNodes();
+    setTimeout(grow, 1000);
+  }
+}
+
+function stop() {
+  console.info("stop...");
+  running = false;
+}</code></pre>
+  <div id="nodes" style="display:none"></div>
+
+<script>
+hljs.initHighlightingOnLoad();
+var running = true;
+var x = [];
+function createNodes() {
+    var frag = document.createDocumentFragment();
+    for (var i=100; i > 0; i--) {
+      frag.appendChild(document.createElement('div'));
+    }
+    document.getElementById('nodes').appendChild(frag);
+}
+
+function start() {
+	running = true;
+	console.info("start...");
+	grow();
+}
+
+function grow() {
+	if(running) {
+		console.info("1초 간격으로 running");
+		x.push(new Array(1000000).join('x'));
+    createNodes();
+    setTimeout(grow, 1000);
+	}
+}
+
+function stop() {
+	console.info("stop...");
+	running = false;
+}
+</script>
+</body>
+</html>

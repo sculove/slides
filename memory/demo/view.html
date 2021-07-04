@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="../../__lib__/reveal.js-3.3.0/lib/css/darkula.css">
+<script src="../../__lib__/reveal.js-3.3.0/plugin/highlight/highlight.pack.js"></script>
+</head>
+<body>
+  <h1>View Example</h1>
+  <ul>
+    <li>Summary View
+      <ul>
+        <li>Summary - All Object</li>
+        <li>Summary - Object allocated between Snapshot1 and Snapshot2
+          <ol>
+            <li>Select Snapshot2</li>
+            <li>Select Object allocated between Snapshot1 and Snapshot2</li>
+            <li>check Item, Array</li>
+          </ol>
+        </li>
+      </ul>
+    </li>
+    <li>Comparison View - Snapshot1/2
+      <ol>
+        <li>Select Snapshot2</li>
+        <li>Select Snapshot1</li>
+        <li>check Item, Array</li>
+      </ol>
+    </li>
+  </ul>
+
+  <ol>
+    <li>Open new secret window</li>
+    <li>Open DevTools</li>
+    <li>Select Profile Tab</li>
+    <li>Take Heap Snapshot => Take Snapshot</li>
+    <li>Push The init Button</li>
+    <li>Take Heap Snapshot => Take Snapshot</li>
+  </ol>
+  <button onclick="init()">init()</button>
+  <pre><code>function Item(x)
+{
+  this.x = x;
+}
+
+function numbers()
+{
+  var result = new Array(10000);
+  for (var i = 0, l = result.length; i < l; ++i)
+    result[i] = new Item(i);
+  return new Item(result);
+}
+
+function strings()
+{
+  var result = new Array(10000);
+  for (var i = 0, l = result.length; i < l; ++i)
+    result[i] = new Item(i.toString());
+  return new Item(result);
+}
+
+function init()
+{
+  numberCache = numbers();
+  stringCache = strings();
+  documentCache = new Item(document.body.textContent.toLowerCase());
+}</code></pre>
+  <div id="nodes" style="display:none"></div>
+
+<script>
+hljs.initHighlightingOnLoad();
+function Item(x)
+{
+  this.x = x;
+}
+
+function numbers()
+{
+  var result = new Array(10000);
+  for (var i = 0, l = result.length; i < l; ++i)
+    result[i] = new Item(i);
+  return new Item(result);
+}
+
+function strings()
+{
+  var result = new Array(10000);
+  for (var i = 0, l = result.length; i < l; ++i)
+    result[i] = new Item(i.toString());
+  return new Item(result);
+}
+
+function init()
+{
+  numberCache = numbers();
+  stringCache = strings();
+  documentCache = new Item(document.body.textContent.toLowerCase());
+}
+</script>
+</body>
+</html>

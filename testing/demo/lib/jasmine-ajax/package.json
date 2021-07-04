@@ -1,0 +1,97 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "jasmine-ajax@^3.2.0",
+        "scope": null,
+        "escapedName": "jasmine-ajax",
+        "name": "jasmine-ajax",
+        "rawSpec": "^3.2.0",
+        "spec": ">=3.2.0 <4.0.0",
+        "type": "range"
+      },
+      "/Users/naver/workspace/sculove.github.io/demo/testing"
+    ]
+  ],
+  "_from": "jasmine-ajax@>=3.2.0 <4.0.0",
+  "_id": "jasmine-ajax@3.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/jasmine-ajax",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "slackersoft",
+    "email": "gregg@slackersoft.net"
+  },
+  "_npmVersion": "2.12.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "jasmine-ajax@^3.2.0",
+    "scope": null,
+    "escapedName": "jasmine-ajax",
+    "name": "jasmine-ajax",
+    "rawSpec": "^3.2.0",
+    "spec": ">=3.2.0 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jasmine-ajax/-/jasmine-ajax-3.2.0.tgz",
+  "_shasum": "0a1600b7d3c503a3904f80679b867985a84e4756",
+  "_shrinkwrap": null,
+  "_spec": "jasmine-ajax@^3.2.0",
+  "_where": "/Users/naver/workspace/sculove.github.io/demo/testing",
+  "bugs": {
+    "url": "https://github.com/jasmine/jasmine-ajax/issues"
+  },
+  "contributors": [
+    {
+      "name": "Gregg Van Hove",
+      "email": "gregg@slackersoft.net"
+    },
+    {
+      "name": "JR Boyens",
+      "email": "jboyens@fooninja.org"
+    }
+  ],
+  "dependencies": {},
+  "description": "A library for faking Ajax responses in your Jasmine suite",
+  "devDependencies": {
+    "grunt": "0.4.0",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-shell": "~0.2.1"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "0a1600b7d3c503a3904f80679b867985a84e4756",
+    "tarball": "https://registry.npmjs.org/jasmine-ajax/-/jasmine-ajax-3.2.0.tgz"
+  },
+  "gitHead": "8b68db5163fd21ee70b1256e978a68cbe7f5d7d0",
+  "homepage": "https://github.com/jasmine/jasmine-ajax#readme",
+  "license": "MIT",
+  "main": "lib/mock-ajax.js",
+  "maintainers": [
+    {
+      "name": "slackersoft",
+      "email": "gregg@slackersoft.net"
+    },
+    {
+      "name": "dwfrank",
+      "email": "dwfrank@pivotallabs.com"
+    }
+  ],
+  "name": "jasmine-ajax",
+  "optionalDependencies": {},
+  "private": false,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasmine/jasmine-ajax.git"
+  },
+  "scripts": {},
+  "url": "https://github.com/jasmine/jasmine-ajax",
+  "version": "3.2.0"
+}

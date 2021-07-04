@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="../../__lib__/reveal.js-3.3.0/lib/css/darkula.css">
+<script src="../../__lib__/reveal.js-3.3.0/plugin/highlight/highlight.pack.js"></script>
+</head>
+<body>
+  <h1>DOM Leak</h1>
+  <ol>
+    <li>Open new secret window</li>
+    <li>Open DevTools</li>
+    <li>Select Profile Tab</li>
+    <li>Record
+      <ol>
+        <li>Push The start Button</li>
+        <li>Wait a minute...</li>
+      </ol>
+    </li>
+    <li>Stop Record</li>
+    <li>Push The stop Button</li>
+  </ol><button onclick="start()">The start Button</button>
+  <button onclick="stop()">The stop Button</button>
+  <pre><code>var running = true;
+var doms = [];
+var wrapper = document.getElementById('nodes');
+function createAndRemoveNodes() {
+    for (var i=100, div; i > 0; i--) {
+      div = document.createElement('div');
+      doms.push(div);
+      wrapper.appendChild(div);
+    }
+    while (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+}
+
+function start() {
+  running = true;
+  console.info("start...");
+  grow();
+}
+
+function grow() {
+  if(running) {
+    console.info("1초 간격으로 running");
+    createAndRemoveNodes();
+    setTimeout(grow, 1000);
+  } else {
+    console.info("release");
+  }
+}
+
+function stop() {
+  console.info("stop...");
+  running = false;
+
+}</code></pre>
+  <div id="nodes" style="display:none"></div>
+
+<script>
+hljs.initHighlightingOnLoad();
+var running = true;
+var doms = [];
+var wrapper = document.getElementById('nodes');
+function createAndRemoveNodes() {
+    for (var i=100, div; i > 0; i--) {
+      div = document.createElement('div');
+      doms.push(div);
+      wrapper.appendChild(div);
+    }
+    while (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+}
+
+function start() {
+	running = true;
+	console.info("start...");
+	grow();
+}
+
+function grow() {
+	if(running) {
+		console.info("1초 간격으로 running");
+    createAndRemoveNodes();
+    setTimeout(grow, 1000);
+	} else {
+    console.info("release");
+  }
+}
+
+function stop() {
+	console.info("stop...");
+	running = false;
+
+}
+</script>
+</body>
+</html>
