@@ -1,3 +1,5 @@
+<!-- .slide: data-transition="zoom"-->
+
 ## 타입스크립트가 궁금합니다.
 11월24일 14:00 - 14:40
 
@@ -54,6 +56,18 @@
 
 -----
 
+## 감사합니다
+
+
+-----
+
+<!-- .slide: data-transition="zoom"-->
+<h2 style="color:#f5da55;text-shadow: 2px 2px #000000;">Deview 2021</h2>
+<h2 style="color:#f5da55;text-shadow: 2px 2px #000000;">FE Open Lounge</h2>
+
+-----
+
+<!-- .slide: data-transition="zoom"-->
 ## 주...ㅇ니어에게 묻습니다. 
 #### "개발자로서의 성장 어떻게 하고 계신가요?"
 11월24일 15:00 - 15:40
@@ -111,6 +125,19 @@
 
 -----
 
+## 감사합니다
+
+
+-----
+
+<!-- .slide: data-transition="zoom"-->
+<h2 style="color:#f5da55;text-shadow: 2px 2px #000000;">Deview 2021</h2>
+<h2 style="color:#f5da55;text-shadow: 2px 2px #000000;">FE Open Lounge</h2>
+
+-----
+
+
+<!-- .slide: data-transition="zoom"-->
 ## 슬기로운 재택생활
 #### 재택 근무 루틴
 
