@@ -5,7 +5,9 @@ body, h1, h2, h3, h4, h5, h6, li, p, span, div {
 
 .red {color:#FF5E99 !important;}
 .green {color:green !important;}
+.naverGreen {color:#2DB400;}
 .blue {color:#268bd2 !important;}
+.whiteBlue {color:#56CbF2 !important;}
 .grey {color: #807E7E !important;}
 .yellow {color:#e7ad52 !important;}
 .whiteYellow {color:#eee8d5 !important;}
@@ -39,4 +41,69 @@ blockquote {
 
 .reveal .slides section .fragment.highlight-red.visible {
   color: #FF5E99;
+}
+
+.sp_team {
+    margin: 0.5em;
+    display: inline-block;
+    vertical-align: super;
+    font-size: 0.5em;
+}
+
+.sp_question {
+    padding: 0.1em 0.2em 0.1em 0.2em;
+    font-size: 0.8em;
+    line-height: 1.6em;
+}
+
+.sp_naver_fe {
+    text-align: left;
+    font-size: 0.6em;
+    color: white !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+.sp_mail {
+    text-align: left;
+    font-size: 0.4em;
+    color: lightgray !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+.sp_br {
+    font-size: 0.5em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1.0 !important;
+}
+
+.sp_table {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.sp_table_td {
+    text-align: left;
+    font-size: 0.4em !important;
+    color: lightgray !important;
+    line-height: 1.0 !important;
+    border-bottom: 0px solid !important;
+    padding-right: 3em !important;
+    margin: 0 !important;
+}
+
+.sp_image {
+    padding: 0.5em 0 0 0!important;
+    margin: 0 !important;
+    width: 100px !important;
+}
+
+.text_bold {
+    font-weight: bold !important;
+}
+
+img[alt=naver_logo] {
+    width: 500px;
 }
