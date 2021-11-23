@@ -1,0 +1,42 @@
+body, h1, h2, h3, h4, h5, h6, li, p, span, div {
+  font-family: 'NanumSquare', sans-serif !important;
+  font-weight: 400;
+}
+
+.red {color:#FF5E99 !important;}
+.green {color:green !important;}
+.blue {color:#268bd2 !important;}
+.grey {color: #807E7E !important;}
+.yellow {color:#e7ad52 !important;}
+.whiteYellow {color:#eee8d5 !important;}
+.white {color:white !important;}
+
+.reveal p {
+  color: #93a1a1;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  color: #eee8d5;
+  font-weight: 800 !important;
+}
+
+.fontBrush {
+  font-family: 'Nanum Brush Script', cursive !important;
+}
+
+strong {
+  color:#e7ad52;
+}
+
+blockquote {
+  width: 80% !important;
+}
+
+.reveal .slides section .fragment.highlight-red.visible {
+  color: #FF5E99;
+}
