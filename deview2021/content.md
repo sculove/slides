@@ -34,7 +34,7 @@
 <p class="sp_naver_fe">FE 개발자로 성장하기 위한 고민 등</p>
 <p class="sp_naver_fe">무엇이든 물어 보세요.</p>
 <p class="sp_br">&nbsp;</p>
-<p class="sp_mail">행사가 끝나고도 물어보고 싶으시면 아래 메일로 보내주세요.</p>
+<p class="sp_mail">행사와 상관없이 궁금한 것들은 아래 메일로 보내주시면 답변드리겠습니다.</p>
 <p class="sp_mail text_bold">dl_deview_fe_love_we_want_you@navercorp.com</p>
 <p class="sp_br">&nbsp;</p>
 <table class="sp_table">
@@ -103,7 +103,7 @@
 <p class="sp_naver_fe">FE 개발자로 성장하기 위한 고민 등</p>
 <p class="sp_naver_fe">무엇이든 물어 보세요.</p>
 <p class="sp_br">&nbsp;</p>
-<p class="sp_mail">행사가 끝나고도 물어보고 싶으시면 아래 메일로 보내주세요.</p>
+<p class="sp_mail">행사와 상관없이 궁금한 것들은 아래 메일로 보내주시면 답변드리겠습니다.</p>
 <p class="sp_mail text_bold">dl_deview_fe_love_we_want_you@navercorp.com</p>
 <p class="sp_br">&nbsp;</p>
 <table class="sp_table">
@@ -159,7 +159,7 @@
 <p class="sp_naver_fe">FE 개발자로 성장하기 위한 고민 등</p>
 <p class="sp_naver_fe">무엇이든 물어 보세요.</p>
 <p class="sp_br">&nbsp;</p>
-<p class="sp_mail">행사가 끝나고도 물어보고 싶으시면 아래 메일로 보내주세요.</p>
+<p class="sp_mail">행사와 상관없이 궁금한 것들은 아래 메일로 보내주시면 답변드리겠습니다.</p>
 <p class="sp_mail text_bold">dl_deview_fe_love_we_want_you@navercorp.com</p>
 <p class="sp_br">&nbsp;</p>
 <table class="sp_table">
