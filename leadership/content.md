@@ -1,4 +1,6 @@
-## 여러분 회사 오시면 즐겁나요?
+## 여러분 회사 오시면
+
+## 즐거우신가요?
 
 -----
 
@@ -125,7 +127,7 @@ block-beta
 
 자칫하면
 
-### 일에 사람이 매몰될 수 있는 환경
+### 사람이 일에 매몰될 수 있는 환경
 
 - 늘어난 인원만큼 복잡해진 관계의 그물망
 - 쌓여가는 과제만큼 높아진 심리적 압박감
@@ -170,7 +172,7 @@ block-beta
 
 - <!-- .element class="fragment" --> 자신의 일상을
 - <!-- .element class="fragment" --> 자기가 알게된 지식을
-- <!-- .element class="fragment" --> 자기 자랑도 할수 있는
+- <!-- .element class="fragment" --> 자기 자랑도 할 수 있는
 
 -----
 
@@ -178,7 +180,7 @@ block-beta
 
 #### 서로를 더 잘 이해할 수 있지 않을까?
 
-#### <!-- .element class="fragment" -->  힘들더라도 즐거움을 얻을 수 있지 않을까?
+#### <!-- .element class="fragment" -->  힘들더라도 <strong class="yellow">즐거움</strong>을 얻을 수 있지 않을까?
 
 -----
 
@@ -402,7 +404,9 @@ block-beta
 
 다시 처음 질문으로
 
-## 여러분 회사 오시면 즐겁나요?
+## 여러분 회사 오시면
+
+## 즐거우신가요?
 
 <p class="fragment">혹시 같은 고민이 있으시다면</p>
 
