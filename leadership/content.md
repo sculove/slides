@@ -262,13 +262,13 @@ block-beta
 
 -----
 
-즐거운 회사생활의 지표라기는 어렵겠지만...
+즐거운 회사생활의 지표라고 보기는 어렵겠지만...
 
 ### 저희팀은 구성원 <strong class="yellow">90%이상이 O 타입</strong>을 유지하면서 동료들과 생활하고 있습니다
 
 -----
 
-### 정착을 위한 '넛지(Nudge)'
+## 정착을 위한 '넛지(Nudge)'
 
 이런 문화를 정착하는게 사실 쉽지 않았어요.
 
@@ -276,7 +276,7 @@ block-beta
 
 -----
 
-#### 일기를 <strong>일일보고</strong> 같이 적는 분위기
+### 일기를 <strong>일일보고</strong> 같이 적는 분위기
 
 <div class="fragment">
 <p>TMI 많이 남발</p>
@@ -286,21 +286,27 @@ block-beta
 
 -----
 
-#### 팀 주간회의 시간에 10분 일기 읽기
+### 팀 주간회의 시간에 10분 일기 읽기
 
 업무보다는 <strong>일상</strong>을 공유해보았습니다.
 
 -----
 
-#### "주번" 시스템
+### "주번" 시스템
 
 <strong class="yellow">팀원 중 한명</strong>이 동료들이 일기를 잘 쓸 수 있도록 독려
+
+-----
 
 <img src="./image/assign1.png" height="600px">
 
 -----
 
-#### 주번 목표 달성을 위한 East Egg
+<img src="./image/angry.png" height="600px">
+
+-----
+
+### 주번 목표 달성을 위한 East Egg
 
 달성조건: 모든 구성원이 매일, 퇴근 전까지 작성 완료
 
@@ -380,7 +386,7 @@ block-beta
 
 -----
 
-언제 몇명이 어려움이 있는지 알 수 있어요.
+언제 몇 명이 어려움이 있는지 알 수 있어요.
 
 <img src="./image/health-check-danger.png" width="750px">
 
